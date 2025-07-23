@@ -33,26 +33,36 @@
      <script>
         let items = [];
 
-        function addItem() {
+        /**
+         * Adds an item to the list from the input field.
+         */
+       function addItem() {
             const input = document.getElementById('itemInput');
             const value = input.value.trim();
             
-            if (value && !items.includes(value)) {
+            if (value) {
                 items.push(value);
                 input.value = '';
                 updateDisplay();
                 updatePickButton();
-            } else if (items.includes(value)) {
-                alert('This item already exists!');
-            }
-        }
+            }        }
 
+
+        /**
+         * Removes an item from the list.
+         * @param {number} index - The index of the item to remove.
+         */
         function removeItem(index) {
             items.splice(index, 1);
             updateDisplay();
             updatePickButton();
         }
 
+        /**
+         * Updates the display of items in the list.
+         *
+         * TODO: add wheel of fortune style animation
+         */
         function updateDisplay() {
             const list = document.getElementById('itemsList');
             
