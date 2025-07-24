@@ -6,30 +6,30 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Glücksrad</h1>
-        
-        <div class="input-section">
-            <div class="input-container">
-                <input type="text" id="itemInput" placeholder="Enter word, number, or phrase..." maxlength="100">
-                <button class="btn btn-add" onclick="addItem()">Add</button>
+        <div class="container">
+            <h1>Glücksrad</h1>
+            
+            <div class="input-section">
+                <div class="input-container">
+                    <input type="text" id="itemInput" placeholder="Enter word, number, or phrase..." maxlength="100">
+                    <button class="btn btn-add" onclick="addItem()">Add</button>
+                </div>
+            </div>
+
+            <div class="items-list">
+                <div id="itemsList"></div>
+            </div>
+
+            <button class="btn btn-pick" id="pickBtn" onclick="pickRandom()" disabled>
+                Pick Random Item
+            </button>
+            
+            <button class="btn btn-clear" onclick="clearAll()">Clear All</button>
+
+            <div class="result" id="result">
+                Ready to pick! Add some items first.
             </div>
         </div>
-
-        <div class="items-list">
-            <div id="itemsList"></div>
-        </div>
-
-        <button class="btn btn-pick" id="pickBtn" onclick="pickRandom()" disabled>
-            Pick Random Item
-        </button>
-        
-        <button class="btn btn-clear" onclick="clearAll()">Clear All</button>
-
-        <div class="result" id="result">
-            Ready to pick! Add some items first.
-        </div>
-    </div>
-     <script src="main.js"></script>  
-</body>
+        <script src="main.js"></script>  
+    </body>
 </html>
