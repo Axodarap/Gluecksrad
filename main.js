@@ -1,4 +1,5 @@
  let items = [];
+ let currentWinner = null;
 
 /**
  * Adds an item to the list from the input field.
@@ -59,15 +60,7 @@ function pickRandom() {
     const randomIndex = Math.floor(Math.random() * items.length);
     const selectedItem = items[randomIndex];
 
-    // Add animation class
-    result.classList.add('animate');
-    result.textContent = `${selectedItem}`;
-    result.classList.add('show');
-
-    // Remove animation class after animation completes
-    setTimeout(() => {
-        result.classList.remove('animate');
-    }, 600);
+    showResultModal(selectedItem);
 }
 
 function clearAll() {
@@ -84,12 +77,72 @@ function clearAll() {
     }, 300);
 }
 
-// Allow adding items with Enter key
-document.getElementById('itemInput').addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') {
-        addItem();
+function showResultModal(winner) {
+    const modal = document.getElementById('resultModal');
+    const modalResult = document.getElementById('modalResult');
+    
+    if (modal && modalResult) {
+        modalResult.textContent = winner;
+        modal.classList.add('show');
     }
+}
+ 
+function closeModal() {
+        const modal = document.getElementById('resultModal');
+        if (modal) {
+            modal.classList.remove('show');
+            currentWinner = null;
+        }
+    }
+
+function removeWinner() {
+    if (currentWinner) {
+        const index = items.indexOf(currentWinner);
+        if (index > -1) {
+            items.splice(index, 1);
+            updateWheel();
+            updateItemsList();
+            updateSpinButton();
+        }
+        closeModal();
+    }
+}
+
+updateDisplay();
+
+
+// TODO clean this up
+document.addEventListener('DOMContentLoaded', function() {
+    // Close modal when clicking outside
+    const resultModal = document.getElementById('resultModal');
+    if (resultModal) {
+        resultModal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    }
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeModal();
+        }
+    });
+
+    // Allow adding items with Enter key
+    const itemInput = document.getElementById('itemInput');
+    if (itemInput) {
+        itemInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                addItem();
+            }
+        });
+    }
+
+    // Initialize display
+    updateWheel();
+    updateItemsList();
+    updateDisplay();
 });
 
-// Initialize display
-updateDisplay();

@@ -6,28 +6,47 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-        <div class="container">
-            <h1>Glücksrad</h1>
-            
+        <!-- Main container for layout -->
+        <div class="container"> 
+            <!-- container for wheel section -->
+            <div class="wheel-section">
+                <h1>Glücksrad</h1>
+                <div class="wheel-graphics">
+                        <!-- Placeholder for wheel graphics -->
+                </div>
+                <button class="btn btn-pick" id="pickBtn" onclick="pickRandom()" disabled>
+                Pick Random Item
+                </button>
+            </div>  
+
+            <!-- container for input section -->
             <div class="input-section">
                 <div class="input-container">
                     <input type="text" id="itemInput" placeholder="Enter word, number, or phrase..." maxlength="100">
                     <button class="btn btn-add" onclick="addItem()">Add</button>
                 </div>
-            </div>
 
-            <div class="items-list">
-                <div id="itemsList"></div>
-            </div>
+                
+                <div class="items-list" id="itemsList">
+                    <!-- list of items will be displayed here -->
+                </div>
 
-            <button class="btn btn-pick" id="pickBtn" onclick="pickRandom()" disabled>
-                Pick Random Item
-            </button>
+                <button class="btn btn-clear" onclick="clearAll()">Clear All</button>
+            </div>
             
-            <button class="btn btn-clear" onclick="clearAll()">Clear All</button>
-
-            <div class="result" id="result">
-                Ready to pick! Add some items first.
+             <!-- Result Modal -->
+            <div class="modal-overlay" id="resultModal">
+                <div class="modal">
+                    <h2>🎉 Winner!</h2>
+                    <div class="modal-result" id="modalResult"></div>
+                    <div class="modal-buttons">
+                    <button class="btn btn-remove-winner" onclick="removeWinner()">
+                        🗑️ Remove from Wheel
+                    </button>
+                    <button class="btn btn-close" onclick="closeModal()">
+                        ✅ Keep & Close
+                    </button>
+                </div>
             </div>
         </div>
         <script src="main.js"></script>  
