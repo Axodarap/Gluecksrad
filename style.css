@@ -311,6 +311,13 @@ input[type="text"]:focus {
     font-style: italic;
 }
 
+.wheel-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
 .wheel-display {
     display: flex;
     justify-content: center;  

@@ -154,11 +154,11 @@ function removeWinner() {
  */
 function updateDisplay() {
     const list = document.getElementById('itemsList');
-    const wheelDisplay = document.getElementById('wheelDisplay');
+    const wheelContainer = document.getElementById('wheelContainer');
 
     if (items.length === 0) {
         list.innerHTML = '<div class="empty-state">No items added yet. Add some items to get started!</div>';
-        wheelDisplay.innerHTML = '<div class="empty-wheel">Add items to create<br>your wheel!</div>';
+        wheelContainer.innerHTML = '<div class="empty-wheel">Add items to create<br>your wheel!</div>';
         return;
     }
 
@@ -169,11 +169,17 @@ function updateDisplay() {
         </div>
     `).join('');
 
-    const wheelHTML = '<div class="wheel" id="wheel"><canvas id="wheelCanvas" width="334" height="334"></canvas><div class="wheel-center"></div></div>';
-    wheelDisplay.innerHTML = wheelHTML;
-    
+    const wheelHTML = `
+        <div class="wheel" id="wheel">
+            <canvas id="wheelCanvas" width="334" height="334"></canvas>
+            <div class="wheel-center"></div>
+        </div>
+    `;
+    wheelContainer.innerHTML = wheelHTML;
+
     drawWheel();
 }
+
 
 // --------------------- wheel section --------------------------
 function drawWheel() {
