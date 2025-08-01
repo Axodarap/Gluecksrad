@@ -1,40 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Glücksrad v0.1</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Glücksrad v0.1</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
         <!-- Main container for layout -->
         <div class="container"> 
-            <!-- container for wheel section -->
-            <div class="wheel-section">
-                <h1>Glücksrad</h1>
-                <div class="wheel-graphics">
-                        <!-- Placeholder for wheel graphics -->
+            <h1>Glücksrad</h1>
+            <div class="wheel-display", id ="wheelDisplay">
+                <div class="empty-wheel">
+                    Add items to create<br>your wheel!
                 </div>
-                <button class="btn btn-pick" id="pickBtn" onclick="pickRandom()" disabled>
-                Pick Random Item
-                </button>
-            </div>  
-
-            <!-- container for input section -->
-            <div class="input-section">
-                <div class="input-container">
-                    <input type="text" id="itemInput" placeholder="What would you like to spin?" maxlength="100">
-                    <button class="btn btn-add" onclick="addItem()">Add</button>
-                </div>
-
-                
-                <div class="items-list" id="itemsList">
-                    <!-- list of items will be displayed here -->
-                </div>
-
-                <button class="btn btn-clear" onclick="clearAll()">Clear All</button>
             </div>
+            <button class="btn btn-pick" id="pickBtn" onclick="pickRandom()" disabled>
+            Pick Random Item
+            </button>            
+            <div class="input-container">
+                <input type="text" id="itemInput" placeholder="What would you like to spin?" maxlength="100">
+                <button class="btn btn-add" onclick="addItem()">Add</button>
+            </div>
+            <div class="items-list" id="itemsList">
+                <!-- list of items will be displayed here -->
+            </div>
+
+            <button class="btn btn-clear" onclick="clearAll()">Clear All</button>
             
-             <!-- Result Modal -->
+                
+                <!-- Result Modal -->
             <div class="modal-overlay" id="resultModal">
                 <div class="modal">
                     <h2> Winner!</h2>

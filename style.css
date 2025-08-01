@@ -29,7 +29,11 @@ h1 {
 
 /* Input Section */
 .input-section {
-    margin-bottom: 30px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    padding: 40px;
 }
 
 .input-container {
@@ -289,4 +293,69 @@ input[type="text"]:focus {
     .btn-add {
         width: 100%;
     }
+}
+
+
+/* ------------------ Wheel Styles --------------------- */
+.empty-wheel {
+    width: 350px;
+    height: 350px;
+    border: 8px dashed #ccc;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-size: 18px;
+    text-align: center;
+    font-style: italic;
+}
+
+.wheel-display {
+    display: flex;
+    justify-content: center;  /* horizontally center */
+    align-items: center;      /* vertically center */
+}
+
+.wheel {
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    border: 8px solid #333;
+    position: relative;
+    transition: transform 4s cubic-bezier(0.23, 1, 0.32, 1);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+}
+
+.wheel canvas {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.wheel-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    background: #333;
+    border-radius: 50%;
+    z-index: 10;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.wheel-pointer {
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 25px solid #ff6b6b;
+    z-index: 5;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }

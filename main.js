@@ -33,8 +33,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize display
     updateWheel();
-    updateItemsList();
+    //updateItemsList();
     updateDisplay();
+    updateWheel();
 });
 
 
@@ -165,4 +166,88 @@ function removeWinner() {
         }
         closeModal();
     }
+}
+
+// --------------------- wheel section --------------------------
+function updateWheel() {
+    const wheelDisplay = document.getElementById('wheelDisplay');
+    
+    if (items.length === 0) {
+        wheelDisplay.innerHTML = '<div class="empty-wheel">Add items to create<br>your wheel!</div>';
+        return;
+    }
+
+    const wheelHTML = '<div class="wheel" id="wheel"><canvas id="wheelCanvas" width="334" height="334"></canvas><div class="wheel-center"></div></div>';
+    wheelDisplay.innerHTML = wheelHTML;
+    
+    drawWheel();
+}
+
+function drawWheel() {
+    const canvas = document.getElementById('wheelCanvas');
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    const radius = canvas.width / 2;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    if (items.length === 0) return;
+
+    const segmentAngle = (2 * Math.PI) / items.length;
+
+    items.forEach((item, index) => {
+        const startAngle = index * segmentAngle - Math.PI / 2; // Start from top
+        const endAngle = startAngle + segmentAngle;
+        const color = colors[index % colors.length];
+
+        // Draw segment
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY);
+        ctx.arc(centerX, centerY, radius, startAngle, endAngle);
+        ctx.closePath();
+        ctx.fillStyle = color;
+        ctx.fill();
+
+        // Draw segment border
+        ctx.strokeStyle = '#fff';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        // Draw text
+        const textAngle = startAngle + segmentAngle / 2;
+        const textRadius = radius * 0.7;
+        const textX = centerX + Math.cos(textAngle) * textRadius;
+        const textY = centerY + Math.sin(textAngle) * textRadius;
+
+        ctx.save();
+        ctx.translate(textX, textY);
+        ctx.rotate(textAngle + Math.PI / 2);
+        ctx.fillStyle = '#fff';
+        ctx.font = 'bold 14px Arial';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+        ctx.shadowBlur = 2;
+        ctx.shadowOffsetX = 1;
+        ctx.shadowOffsetY = 1;
+
+        // Handle long text
+        if (item.length > 12) {
+            const words = item.split(' ');
+            if (words.length > 1) {
+                ctx.fillText(words[0], 0, -8);
+                ctx.fillText(words.slice(1).join(' '), 0, 8);
+            } else {
+                ctx.font = 'bold 12px Arial';
+                ctx.fillText(item, 0, 0);
+            }
+        } else {
+            ctx.fillText(item, 0, 0);
+        }
+
+        ctx.restore();
+    });
 }
