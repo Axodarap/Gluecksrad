@@ -2,6 +2,12 @@
  let items = [];
  let currentWinner = null;
 
+ const colors = [
+    '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7',
+    '#DDA0DD', '#FFB347', '#87CEEB', '#F0E68C', '#FF69B4',
+    '#90EE90', '#FFA07A', '#20B2AA', '#9370DB', '#32CD32'
+];
+
 // ------------------- listeners -------------------
 document.addEventListener('DOMContentLoaded', function() {
     // Close modal when clicking outside
@@ -32,10 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Initialize display
-    updateWheel();
-    //updateItemsList();
     updateDisplay();
-    updateWheel();
 });
 
 
@@ -64,27 +67,6 @@ function removeItem(index) {
     items.splice(index, 1);
     updateDisplay();
     updatePickButton();
-}
-
-/**
- * Updates the display of items in the list.
- *
- * TODO: add wheel of fortune style animation
- */
-function updateDisplay() {
-    const list = document.getElementById('itemsList');
-
-    if (items.length === 0) {
-        list.innerHTML = '<div class="empty-state">No items added yet. Add some items to get started!</div>';
-        return;
-    }
-
-    list.innerHTML = items.map((item, index) => `
-        <div class="item">
-            <span class="item-text">${item}</span>
-            <button class="btn-remove" onclick="removeItem(${index})" title="Remove item">×</button>
-        </div>
-    `).join('');
 }
 
 /**
@@ -160,7 +142,6 @@ function removeWinner() {
         const index = items.indexOf(currentWinner);
         if (index > -1) {
             items.splice(index, 1);
-            //updateWheel();
             updateDisplay();
             updatePickButton();
         }
@@ -168,14 +149,25 @@ function removeWinner() {
     }
 }
 
-// --------------------- wheel section --------------------------
-function updateWheel() {
+/**
+ * Updates the display of items in the list + the wheel.
+ */
+function updateDisplay() {
+    const list = document.getElementById('itemsList');
     const wheelDisplay = document.getElementById('wheelDisplay');
-    
+
     if (items.length === 0) {
+        list.innerHTML = '<div class="empty-state">No items added yet. Add some items to get started!</div>';
         wheelDisplay.innerHTML = '<div class="empty-wheel">Add items to create<br>your wheel!</div>';
         return;
     }
+
+    list.innerHTML = items.map((item, index) => `
+        <div class="item">
+            <span class="item-text">${item}</span>
+            <button class="btn-remove" onclick="removeItem(${index})" title="Remove item">×</button>
+        </div>
+    `).join('');
 
     const wheelHTML = '<div class="wheel" id="wheel"><canvas id="wheelCanvas" width="334" height="334"></canvas><div class="wheel-center"></div></div>';
     wheelDisplay.innerHTML = wheelHTML;
@@ -183,6 +175,7 @@ function updateWheel() {
     drawWheel();
 }
 
+// --------------------- wheel section --------------------------
 function drawWheel() {
     const canvas = document.getElementById('wheelCanvas');
     if (!canvas) return;
