@@ -60,6 +60,7 @@ function pickRandom() {
     const randomIndex = Math.floor(Math.random() * items.length);
     const selectedItem = items[randomIndex];
 
+    currentWinner = selectedItem;
     showResultModal(selectedItem);
 }
 
@@ -100,15 +101,15 @@ function removeWinner() {
         const index = items.indexOf(currentWinner);
         if (index > -1) {
             items.splice(index, 1);
-            updateWheel();
-            updateItemsList();
-            updateSpinButton();
+            //updateWheel();
+            updateDisplay();
+            updatePickButton();
         }
         closeModal();
     }
 }
 
-updateDisplay();
+//updateDisplay();
 
 
 // TODO clean this up

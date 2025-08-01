@@ -22,7 +22,7 @@
             <!-- container for input section -->
             <div class="input-section">
                 <div class="input-container">
-                    <input type="text" id="itemInput" placeholder="Enter word, number, or phrase..." maxlength="100">
+                    <input type="text" id="itemInput" placeholder="What would you like to spin?" maxlength="100">
                     <button class="btn btn-add" onclick="addItem()">Add</button>
                 </div>
 
@@ -37,14 +37,14 @@
              <!-- Result Modal -->
             <div class="modal-overlay" id="resultModal">
                 <div class="modal">
-                    <h2>🎉 Winner!</h2>
+                    <h2> Winner!</h2>
                     <div class="modal-result" id="modalResult"></div>
                     <div class="modal-buttons">
                     <button class="btn btn-remove-winner" onclick="removeWinner()">
-                        🗑️ Remove from Wheel
+                        remove
                     </button>
                     <button class="btn btn-close" onclick="closeModal()">
-                        ✅ Keep & Close
+                        keep
                     </button>
                 </div>
             </div>
