@@ -1,6 +1,7 @@
  // -------------------- global variables --------------------
  let items = [];
  let currentWinner = null;
+ let isSpinning = false;
 
  const colors = [
     '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7',
@@ -54,7 +55,7 @@ function addItem() {
         items.push(value);
         input.value = '';
         updateDisplay();
-        updatePickButton();
+        updateSpinButton();
     }        
 }
 
@@ -66,18 +67,20 @@ function addItem() {
 function removeItem(index) {
     items.splice(index, 1);
     updateDisplay();
-    updatePickButton();
+    updateSpinButton();
 }
 
 /**
- * updates pick button depending on list length
+ * updates spin button depending on list length
  */
-function updatePickButton() {
-    const btn = document.getElementById('pickBtn');
-    btn.disabled = items.length === 0;
+function updateSpinButton() {
+    const btn = document.getElementById('spinBtn');
+    btn.disabled = items.length === 0 || isSpinning;
 }
 
 /**
+ *  OBSOLETE
+ * 
  *  Picks a random item from the list and displays it in a modal.
  */
 function pickRandom() {
@@ -99,7 +102,7 @@ function clearAll() {
 
     items = [];
     updateDisplay();
-    updatePickButton();
+    updateSpinButton();
 
     const result = document.getElementById('result');
     result.classList.remove('show');
@@ -143,7 +146,7 @@ function removeWinner() {
         if (index > -1) {
             items.splice(index, 1);
             updateDisplay();
-            updatePickButton();
+            updateSpinButton();
         }
         closeModal();
     }
@@ -249,4 +252,36 @@ function drawWheel() {
 
         ctx.restore();
     });
+}
+
+/*
+* spins the wheel
+*/
+function spinWheel() {
+    if (items.length === 0 || isSpinning) return;
+    
+    isSpinning = true;
+    updateSpinButton();
+    
+    const wheel = document.getElementById('wheel');
+    
+    // Calculate random rotation (multiple full rotations + random final position)
+    const segmentAngle = 360 / items.length;
+    const randomSegment = Math.floor(Math.random() * items.length);
+    const baseRotation = 1800; // 5 full rotations
+    // Adjust for canvas starting from top instead of right
+    const finalRotation = baseRotation + (360 - (randomSegment * segmentAngle)) - (segmentAngle / 2) + 90;
+    
+    // Apply rotation
+    wheel.style.transform = `rotate(${finalRotation}deg)`;
+    
+    // Show result after spin completes
+    setTimeout(() => {
+        const selectedItem = items[randomSegment];
+        currentWinner = selectedItem;
+        showResultModal(selectedItem);
+        
+        isSpinning = false;
+        updateSpinButton();
+    }, 4000);
 }

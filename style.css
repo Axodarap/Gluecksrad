@@ -82,7 +82,7 @@ input[type="text"]:focus {
     box-shadow: 0 10px 25px #949aa550;
 }
 
-.btn-pick {
+.btn-spin {
     background-color: #5181d3;
     color: white;
     font-size: 18px;
@@ -91,12 +91,12 @@ input[type="text"]:focus {
     width: 100%;
 }
 
-.btn-pick:hover:not(:disabled) {
+.btn-spin:hover:not(:disabled) {
     transform: translateY(-3px);
     box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
 }
 
-.btn-pick:disabled {
+.btn-spin:disabled {
     opacity: 0.6;
     cursor: not-allowed;
 }
