@@ -2,6 +2,7 @@
  let items = [];
  let currentWinner = null;
  let isSpinning = false;
+ let currentAngle = 0;
 
  const colors = [
     '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7',
@@ -201,7 +202,7 @@ function drawWheel() {
     const segmentAngle = (2 * Math.PI) / items.length;
 
     items.forEach((item, index) => {
-        const startAngle = index * segmentAngle - Math.PI / 2; // Start from top
+        const startAngle = -index * segmentAngle - Math.PI; // Start from top
         const endAngle = startAngle + segmentAngle;
         const color = colors[index % colors.length];
 
@@ -255,32 +256,49 @@ function drawWheel() {
 }
 
 /*
-* spins the wheel
+* spins the wheel --> PROBLEM: when removing item, still problemski
+* position is posisbly not remembered and always calculated from the top
 */
 function spinWheel() {
     if (items.length === 0 || isSpinning) return;
-    
+
     isSpinning = true;
     updateSpinButton();
-    
+
     const wheel = document.getElementById('wheel');
-    
-    // Calculate random rotation (multiple full rotations + random final position)
     const segmentAngle = 360 / items.length;
-    const randomSegment = Math.floor(Math.random() * items.length);
-    const baseRotation = 1800; // 5 full rotations
-    // Adjust for canvas starting from top instead of right
-    const finalRotation = baseRotation + (360 - (randomSegment * segmentAngle)) - (segmentAngle / 2) + 90;
-    
-    // Apply rotation
-    wheel.style.transform = `rotate(${finalRotation}deg)`;
-    
-    // Show result after spin completes
+
+    // Random angle between 0 and 360 degrees
+    const randomAngle = Math.random() * 360;
+
+    // Total rotation is full rotations plus random angle
+    const finalAngle = currentAngle + 4 * 360 + randomAngle;       // TODO avoid magic constants
+
+    // save new angle
+    currentAngle = (currentAngle + randomAngle) % 360;
+
+    // Apply rotation with smooth transition
+    wheel.style.transition = 'transform 4s ease-out';
+    wheel.style.transform = `rotate(${finalAngle}deg)`;
+
+    // DEBUG STUF ----------------------------------------------------
+    document.getElementById("debugText").innerText= "Random Angle: " + randomAngle + ", Current Angle: " + currentAngle;
+
     setTimeout(() => {
-        const selectedItem = items[randomSegment];
+        // Normalize angle to [0, 360)
+        const normalizedAngle = finalAngle % 360;
+
+        // Determine index of segment the pointer lands on
+        let selectedIndex = Math.floor(normalizedAngle / segmentAngle) % items.length;
+
+        const selectedItem = items[selectedIndex];
         currentWinner = selectedItem;
         showResultModal(selectedItem);
-        
+
+        // Reset transition for next spin and fix wheel rotation angle to normalized angle
+        wheel.style.transition = 'none';
+        wheel.style.transform = `rotate(${normalizedAngle}deg)`;
+
         isSpinning = false;
         updateSpinButton();
     }, 4000);
