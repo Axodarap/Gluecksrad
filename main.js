@@ -135,6 +135,8 @@ function closeModal() {
     if (modal) {
         modal.classList.remove('show');
         currentWinner = null;
+        isSpinning = false;
+        updateSpinButton();
     }
 }
 
@@ -147,7 +149,6 @@ function removeWinner() {
         if (index > -1) {
             items.splice(index, 1);
             updateDisplay();
-            updateSpinButton();
         }
         closeModal();
     }
@@ -201,15 +202,17 @@ function drawWheel() {
 
     const segmentAngle = (2 * Math.PI) / items.length;
 
-    items.forEach((item, index) => {
-        const startAngle = -index * segmentAngle - Math.PI; // Start from top
-        const endAngle = startAngle + segmentAngle;
-        const color = colors[index % colors.length];
+    const startOffset = -Math.PI / 2;
 
+    items.forEach((item, index) => {
+        const startAngle = startOffset - index * segmentAngle;
+        const endAngle = startAngle - segmentAngle;
+        const color = colors[index % colors.length];
+        
         // Draw segment
         ctx.beginPath();
         ctx.moveTo(centerX, centerY);
-        ctx.arc(centerX, centerY, radius, startAngle, endAngle);
+        ctx.arc(centerX, centerY, radius, startAngle, endAngle, counterclockwise=true);
         ctx.closePath();
         ctx.fillStyle = color;
         ctx.fill();
@@ -220,7 +223,7 @@ function drawWheel() {
         ctx.stroke();
 
         // Draw text
-        const textAngle = startAngle + segmentAngle / 2;
+        const textAngle = startAngle - segmentAngle / 2;
         const textRadius = radius * 0.7;
         const textX = centerX + Math.cos(textAngle) * textRadius;
         const textY = centerY + Math.sin(textAngle) * textRadius;
@@ -256,8 +259,7 @@ function drawWheel() {
 }
 
 /*
-* spins the wheel --> PROBLEM: when removing item, still problemski
-* position is posisbly not remembered and always calculated from the top
+* spins the wheel --> still sometimes get wrong result
 */
 function spinWheel() {
     if (items.length === 0 || isSpinning) return;
@@ -272,24 +274,16 @@ function spinWheel() {
     const randomAngle = Math.random() * 360;
 
     // Total rotation is full rotations plus random angle
-    const finalAngle = currentAngle + 4 * 360 + randomAngle;       // TODO avoid magic constants
-
-    // save new angle
-    currentAngle = (currentAngle + randomAngle) % 360;
-
-    // Apply rotation with smooth transition
+    const finalAngle = currentAngle + 6 * 360 + randomAngle;       // TODO avoid magic constants
+  
+    // Apply rotation with smooth transition   TODO: make transition time configurable and more elegant
     wheel.style.transition = 'transform 4s ease-out';
     wheel.style.transform = `rotate(${finalAngle}deg)`;
 
-    // DEBUG STUF ----------------------------------------------------
-    document.getElementById("debugText").innerText= "Random Angle: " + randomAngle + ", Current Angle: " + currentAngle;
-
+   
     setTimeout(() => {
-        // Normalize angle to [0, 360)
-        const normalizedAngle = finalAngle % 360;
-
         // Determine index of segment the pointer lands on
-        let selectedIndex = Math.floor(normalizedAngle / segmentAngle) % items.length;
+        let selectedIndex = angle2index(randomAngle, currentAngle, items.length);
 
         const selectedItem = items[selectedIndex];
         currentWinner = selectedItem;
@@ -297,9 +291,20 @@ function spinWheel() {
 
         // Reset transition for next spin and fix wheel rotation angle to normalized angle
         wheel.style.transition = 'none';
-        wheel.style.transform = `rotate(${normalizedAngle}deg)`;
+        wheel.style.transform = `rotate(${finalAngle % 360}deg)`;
 
         isSpinning = false;
         updateSpinButton();
-    }, 4000);
+
+        // save new angle
+        currentAngle = finalAngle % 360;
+    }, 4000);  
+}
+
+/*
+ * Converts an angle in degrees to the corresponding index in the wheel
+ */
+function angle2index(phi, phi_0, num_items) {
+    const segmentAngle = 360 / num_items;
+    return Math.floor(((phi + phi_0) % 360) / segmentAngle);
 }
