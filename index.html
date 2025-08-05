@@ -9,9 +9,9 @@
         <!-- Main container for layout -->
         <div class="container"> 
             <h1>Glücksrad</h1>
-            <div class="wheel-display" id="wheelDisplay">
+            <div class="sub-container" id="wheelContainer">
                 <div class="wheel-pointer"></div>
-                <div class="wheel-container" id="wheelContainer">
+                    <div class="wheel-display" id="wheelDisplay">
                     <div class="empty-wheel">
                         Add items to create<br>your wheel!
                     </div>
@@ -20,7 +20,7 @@
             <button class="btn btn-spin" id="spinBtn" onclick="spinWheel()" disabled>
             Pick Random Item
             </button>            
-            <div class="input-container">
+            <div class="sub-container">
                 <input type="text" id="itemInput" placeholder="What would you like to spin?" maxlength="100">
                 <button class="btn btn-add" onclick="addItem()">Add</button>
             </div>
