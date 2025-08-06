@@ -250,6 +250,7 @@ input[type="text"]:focus {
 .wheel-container {
   display: flex;
   justify-content: center;
+  align-items: center;
   position: relative;   /* to create new reference frame for children */
 }
 
@@ -282,6 +283,7 @@ input[type="text"]:focus {
     position: relative;
     transition: transform 4s cubic-bezier(0.23, 1, 0.32, 1);
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+
 }
 
 .wheel canvas {
