@@ -1,6 +1,7 @@
 /* General Styles */
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+     font-size: 32px;
 }
 
 .container {
@@ -36,9 +37,9 @@ h1 {
 input[type="text"] {
     flex: 1;
     padding: 15px;
-    border: 2px solid #e1e8ed;
+    border: 3px solid #e1e8ed;
     border-radius: 10px;
-    font-size: 16px;
+    font-size: 32px;
     transition: all 0.3s ease;
     background: rgba(255, 255, 255, 0.8);
 }
@@ -47,7 +48,7 @@ input[type="text"]:focus {
     outline: none;
     border-color: #769CDF;
     box-shadow: 0 0 20px rgba(102, 126, 234, 0.2);
-    transform: translateY(-2px);
+    transform: translateY(-6px);
 }
 
 /* Buttons */
@@ -55,12 +56,12 @@ input[type="text"]:focus {
     padding: 15px 25px;
     border: none;
     border-radius: 10px;
-    font-size: 16px;
-    font-weight: 600;
+    font-size: 50px;
+    font-weight: 400;
     cursor: pointer;
     transition: all 0.3s ease;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
 }
 
 .btn-add {
@@ -69,22 +70,22 @@ input[type="text"]:focus {
 }
 
 .btn-add:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px #949aa550;
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px #949aa550;
 }
 
 .btn-spin {
     background-color: #5181d3;
     color: white;
-    font-size: 18px;
+    font-size: 50px;
     padding: 20px 40px;
     margin: 20px 0;
     width: 100%;
 }
 
 .btn-spin:hover:not(:disabled) {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px rgba(102, 126, 234, 0.4);
 }
 
 .btn-spin:disabled {
@@ -95,7 +96,7 @@ input[type="text"]:focus {
 .btn-clear {
     background: #ff6b6b;
     color: white;
-    font-size: 14px;
+    font-size: 50px;
     padding: 10px 20px;
     margin: 0 auto;
 }
@@ -113,7 +114,7 @@ input[type="text"]:focus {
 
 .item {
     background: rgba(102, 126, 234, 0.1);
-    border: 1px solid rgba(102, 126, 234, 0.2);
+    border: 2px solid rgba(102, 126, 234, 0.2);
     border-radius: 8px;
     padding: 12px 15px;
     margin: 8px 0;
@@ -138,10 +139,10 @@ input[type="text"]:focus {
     color: white;
     border: none;
     border-radius: 50%;
-    width: 25px;
-    height: 25px;
+    width: 50px;
+    height: 50px;
     cursor: pointer;
-    font-size: 12px;
+    font-size: 32px;
     font-weight: bold;
     transition: all 0.2s ease;
 }
@@ -151,31 +152,7 @@ input[type="text"]:focus {
     transform: scale(1.1);
 }
 
-/* Result Section */
-.result {
-    margin-top: 30px;
-    padding: 25px;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    border-radius: 15px;
-    color: white;
-    font-size: 20px;
-    font-weight: 600;
-    min-height: 70px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.5s ease;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.result.show {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Empty State */
+/* Empty list */
 .empty-state {
     color: #666;
     font-style: italic;
@@ -232,7 +209,7 @@ input[type="text"]:focus {
     color: white;
     padding: 25px;
     border-radius: 15px;
-    font-size: 24px;
+    font-size: 50px;
     font-weight: 600;
     margin: 20px 0;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -249,6 +226,7 @@ input[type="text"]:focus {
     background: linear-gradient(135deg, #ff6b6b, #ee5a52);
     color: white;
     flex: 1;
+    font-size: 25px;
 }
 
 .btn-remove-winner:hover {
@@ -260,6 +238,7 @@ input[type="text"]:focus {
     background: linear-gradient(135deg, #4CAF50, #45a049);
     color: white;
     flex: 1;
+    font-size: 25px;
 }
 
 .btn-close:hover {
@@ -277,13 +256,13 @@ input[type="text"]:focus {
 .empty-wheel {
     width: 90vw;
     aspect-ratio: 1 / 1;
-    border: 8px dashed #ccc;
+    border: 15px dashed #ccc;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #666;
-    font-size: 18px;
+    font-size: 50px;
     text-align: center;
     font-style: italic;
 }
@@ -296,8 +275,8 @@ input[type="text"]:focus {
 }
 
 .wheel {
-    width: 350px;
-    height: 350px;
+    width: 90vw;
+    aspect-ratio: 1 / 1;
     border-radius: 50%;
     border: 8px solid #333;
     position: relative;

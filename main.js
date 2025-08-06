@@ -160,7 +160,7 @@ function updateDisplay() {
 
     const wheelHTML = `
         <div class="wheel" id="wheel">
-            <canvas id="wheelCanvas" width="334" height="334"></canvas>
+            <canvas id="wheelCanvas"></canvas>
             <div class="wheel-center"></div>
         </div>
     `;
@@ -171,21 +171,40 @@ function updateDisplay() {
 
 
 // --------------------- wheel section --------------------------
-function drawWheel() {
-    const canvas = document.getElementById('wheelCanvas');
-    if (!canvas) return;
-    
-    const ctx = canvas.getContext('2d');
-    const centerX = canvas.width / 2;
-    const centerY = canvas.height / 2;
-    const radius = canvas.width / 2;
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+function setupCanvas(canvas) {
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.getBoundingClientRect();
+
+  canvas.width = rect.width * dpr;
+  canvas.height = rect.height * dpr;
+
+  canvas.style.width = rect.width + 'px';
+  canvas.style.height = rect.height + 'px';
+
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+
+  return { ctx, width: rect.width, height: rect.height };
+}
+
+function drawWheel() {
+
+    const lineWidth = 10; // Width of the lines between segments
+    const canvas = document.getElementById('wheelCanvas');
+
+    /* removed for debugging
+    const { ctx, width, height } = setupCanvas(canvas);
+
+    const centerX = width / 2;
+    const centerY = height / 2;
+    const radius = Math.min(width, height) / 2;
+
+    ctx.clearRect(0, 0, width, height);
 
     if (items.length === 0) return;
 
     const segmentAngle = (2 * Math.PI) / items.length;
-
     const startOffset = -Math.PI / 2;
 
     items.forEach((item, index) => {
@@ -193,20 +212,17 @@ function drawWheel() {
         const endAngle = startAngle - segmentAngle;
         const color = colors[index % colors.length];
         
-        // Draw segment
         ctx.beginPath();
         ctx.moveTo(centerX, centerY);
-        ctx.arc(centerX, centerY, radius, startAngle, endAngle, counterclockwise=true);
+        ctx.arc(centerX, centerY, radius, startAngle, endAngle, true);
         ctx.closePath();
         ctx.fillStyle = color;
         ctx.fill();
 
-        // Draw segment border
         ctx.strokeStyle = '#fff';
-        ctx.lineWidth = 2;
+        ctx.lineWidth = lineWidth;
         ctx.stroke();
 
-        // Draw text
         const textAngle = startAngle - segmentAngle / 2;
         const textRadius = radius * 0.7;
         const textX = centerX + Math.cos(textAngle) * textRadius;
@@ -224,7 +240,6 @@ function drawWheel() {
         ctx.shadowOffsetX = 1;
         ctx.shadowOffsetY = 1;
 
-        // Handle long text
         if (item.length > 12) {
             const words = item.split(' ');
             if (words.length > 1) {
@@ -239,8 +254,10 @@ function drawWheel() {
         }
 
         ctx.restore();
-    });
+    }); 
+    */
 }
+
 
 /*
 * spins the wheel --> still sometimes get wrong result
