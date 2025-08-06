@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (resultModal) {
         resultModal.addEventListener('click', function(e) {
             if (e.target === this) {
-                closeModal();
+                closePopup();
             }
     });
 }
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Close modal with Escape key
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
-            closeModal();
+            closePopup();
         }
     });
 
@@ -80,22 +80,6 @@ function updateSpinButton() {
 }
 
 /**
- *  OBSOLETE
- * 
- *  Picks a random item from the list and displays it in a modal.
- */
-function pickRandom() {
-    if (items.length === 0) return;
-
-    const result = document.getElementById('result');
-    const randomIndex = Math.floor(Math.random() * items.length);
-    const selectedItem = items[randomIndex];
-
-    currentWinner = selectedItem;
-    showResultModal(selectedItem);
-}
-
-/**
  * Clears all items from the list and updates the display.
  */
 function clearAll() {
@@ -117,23 +101,23 @@ function clearAll() {
  * 
  * @param {string} winner - The item that won.
  */
-function showResultModal(winner) {
-    const modal = document.getElementById('resultModal');
-    const modalResult = document.getElementById('modalResult');
+function showResultPopup(winner) {
+    const popup = document.getElementById('resultPopup');
+    const popupResult = document.getElementById('popupResult');
     
-    if (modal && modalResult) {
-        modalResult.textContent = winner;
-        modal.classList.add('show');
+    if (popup && popupResult) {
+        popupResult.textContent = winner;
+        popup.classList.add('show');
     }
 }
 
 /**
- * Closes the result modal and resets the current winner.
+ * Closes the result popup and resets the current winner.
  */
-function closeModal() {
-    const modal = document.getElementById('resultModal');
-    if (modal) {
-        modal.classList.remove('show');
+function closePopup() {
+    const popup = document.getElementById('resultPopup');
+    if (popup) {
+        popup.classList.remove('show');
         currentWinner = null;
         isSpinning = false;
         updateSpinButton();
@@ -150,7 +134,7 @@ function removeWinner() {
             items.splice(index, 1);
             updateDisplay();
         }
-        closeModal();
+        closePopup();
     }
 }
 
@@ -162,7 +146,7 @@ function updateDisplay() {
     const wheelDisplay = document.getElementById('wheelDisplay');
 
     if (items.length === 0) {
-        list.innerHTML = '<div class="empty-state">No items added yet. Add some items to get started!</div>';
+        list.innerHTML = '<div class="empty-state">No items added yet. Add some items to get started!</div>' ;
         wheelDisplay.innerHTML = '<div class="empty-wheel">Add items to create<br>your wheel!</div>';
         return;
     }
@@ -287,7 +271,7 @@ function spinWheel() {
 
         const selectedItem = items[selectedIndex];
         currentWinner = selectedItem;
-        showResultModal(selectedItem);
+        showResultPopup(selectedItem);
 
         // Reset transition for next spin and fix wheel rotation angle to normalized angle
         wheel.style.transition = 'none';

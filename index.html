@@ -7,36 +7,37 @@
     </head>
     <body>
         <!-- Main container for layout -->
+        
         <div class="container"> 
             <h1>Glücksrad</h1>
-            <div class="sub-container" id="wheelContainer">
-                <div class="wheel-pointer"></div>
-                    <div class="wheel-display" id="wheelDisplay">
-                    <div class="empty-wheel">
-                        Add items to create<br>your wheel!
-                    </div>
+            <div class="wheel-container" id="wheelContainer">
+                <div class="wheel-pointer">
+                    <!-- Pointer for the wheel -->
                 </div>
+                <div class="wheel-display" id="wheelDisplay">
+                    <!-- Wheel will be rendered here -->
+                </div>
+
             </div>
+            
             <button class="btn btn-spin" id="spinBtn" onclick="spinWheel()" disabled>
-            Pick Random Item
-            </button>            
-            <div class="sub-container">
+                Pick Random Item
+            </button>      
+            <div class="item-input-container">
                 <input type="text" id="itemInput" placeholder="What would you like to spin?" maxlength="100">
                 <button class="btn btn-add" onclick="addItem()">Add</button>
             </div>
             <div class="items-list" id="itemsList">
                 <!-- list of items will be displayed here -->
             </div>
-
-            <button class="btn btn-clear" onclick="clearAll()">Clear All</button>
+            <button class="btn btn-clear" onclick="clearAll()">Clear All</button>   
             
-                
-                <!-- Result Modal -->
-            <div class="modal-overlay" id="resultModal">
-                <div class="modal">
+            <!-- Result Popup -->
+            <div class="popup-overlay" id="resultPopup">
+                <div class="popup">
                     <h2> Winner!</h2>
-                    <div class="modal-result" id="modalResult"></div>
-                    <div class="modal-buttons">
+                    <div class="popup-result" id="popupResult"></div>
+                    <div class="popup-buttons">
                     <button class="btn btn-remove-winner" onclick="removeWinner()">
                         remove
                     </button>
