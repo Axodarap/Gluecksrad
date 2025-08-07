@@ -1,176 +1,34 @@
- // -------------------- global variables --------------------
- let items = [];
- let currentWinner = null;
- let isSpinning = false;
- let currentAngle = 0;
+let currentRotation = 0;
+let items = [1, 2, 3, 4, 5,6,7,8,9,10,11,12,13];
+let canvas = document.getElementById('wheelCanvas');
 
- const colors = [
-    '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7',
-    '#DDA0DD', '#FFB347', '#87CEEB', '#F0E68C', '#FF69B4',
-    '#90EE90', '#FFA07A', '#20B2AA', '#9370DB', '#32CD32'
+
+const colors = [
+  '#D84315', // Red
+  '#388E3C', // Green
+  '#FBC02D', // Yellow
+  '#F57C00', // Orange
+  '#0288D1', // Light Blue
+  '#7B1FA2', // Purple
+  '#C2185B', // Magenta
+  '#009688'  // Teal
 ];
 
-// ------------------- listeners -------------------
-document.addEventListener('DOMContentLoaded', function() {
-    // Close modal when clicking outside
-    const resultModal = document.getElementById('resultModal');
-    if (resultModal) {
-        resultModal.addEventListener('click', function(e) {
-            if (e.target === this) {
-                closePopup();
-            }
-    });
-}
-
-    // Close modal with Escape key
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            closePopup();
-        }
-    });
-
-    // Allow adding items with Enter key
-    const itemInput = document.getElementById('itemInput');
-    if (itemInput) {
-        itemInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                addItem();
-            }
-        });
-    }
-
-    // Initialize display
-    updateDisplay();
-});
-
-
-// -------------------- functions --------------------
-/**
- * Adds an item to the list from the input field.
- */
-function addItem() {
-    const input = document.getElementById('itemInput');
-    const value = input.value.trim();
-
-    if (value) {
-        items.push(value);
-        input.value = '';
-        updateDisplay();
-        updateSpinButton();
-    }        
-}
-
-
-/**
- * Removes an item from the list.
- * @param {number} index - The index of the item to remove.
- */
-function removeItem(index) {
-    items.splice(index, 1);
-    updateDisplay();
-    updateSpinButton();
-}
-
-/**
- * updates spin button depending on list length
- */
-function updateSpinButton() {
-    const btn = document.getElementById('spinBtn');
-    btn.disabled = items.length === 0 || isSpinning;
-}
-
-/**
- * Clears all items from the list and updates the display.
- */
-function clearAll() {
-    if (items.length === 0) return;
-
-    items = [];
-    updateDisplay();
-    updateSpinButton();
-
-    const result = document.getElementById('result');
-    result.classList.remove('show');
-    setTimeout(() => {
-        result.textContent = 'Ready to pick! Add some items first.';
-    }, 300);
-}
-
-/**
- * displays the result modal with the winning item.
- * 
- * @param {string} winner - The item that won.
- */
-function showResultPopup(winner) {
-    const popup = document.getElementById('resultPopup');
-    const popupResult = document.getElementById('popupResult');
+function spinWheel() {
+    const wheel = document.getElementById('wheelCanvas'); // Changed from 'wheelContainer' to 'wheel'
+    const spinDegrees = 1080 + Math.floor(Math.random() * 360); // 3 full spins + randomness
+    currentRotation += spinDegrees;
     
-    if (popup && popupResult) {
-        popupResult.textContent = winner;
-        popup.classList.add('show');
-    }
+    wheel.style.transition = 'transform 4s ease-out';
+    wheel.style.transform = `translate(-50%, -50%) rotate(${currentRotation}deg)`; // Keep the centering transform
+    
+    setTimeout(() => {
+        // Normalize to within 360 degrees for consistency
+        currentRotation = currentRotation % 360;
+        wheel.style.transition = 'none';
+        wheel.style.transform = `translate(-50%, -50%) rotate(${currentRotation}deg)`;
+    }, 4000);
 }
-
-/**
- * Closes the result popup and resets the current winner.
- */
-function closePopup() {
-    const popup = document.getElementById('resultPopup');
-    if (popup) {
-        popup.classList.remove('show');
-        currentWinner = null;
-        isSpinning = false;
-        updateSpinButton();
-    }
-}
-
-/*
-* removes the current winner from the list and updates the display.
-*/
-function removeWinner() {
-    if (currentWinner) {
-        const index = items.indexOf(currentWinner);
-        if (index > -1) {
-            items.splice(index, 1);
-            updateDisplay();
-        }
-        closePopup();
-    }
-}
-
-/**
- * Updates the display of items in the list + the wheel.
- */
-function updateDisplay() {
-    const list = document.getElementById('itemsList');
-    const wheelDisplay = document.getElementById('wheelDisplay');
-
-    if (items.length === 0) {
-        list.innerHTML = '<div class="empty-state">No items added yet. Add some items to get started!</div>' ;
-        wheelDisplay.innerHTML = '<div class="empty-wheel">Add items to create<br>your wheel!</div>';
-        return;
-    }
-
-    list.innerHTML = items.map((item, index) => `
-        <div class="item">
-            <span class="item-text">${item}</span>
-            <button class="btn-remove" onclick="removeItem(${index})" title="Remove item">×</button>
-        </div>
-    `).join('');
-
-    const wheelHTML = `
-        <div class="wheel" id="wheel">
-            <canvas id="wheelCanvas"></canvas>
-            <div class="wheel-center"></div>
-        </div>
-    `;
-    wheelDisplay.innerHTML = wheelHTML;
-
-    drawWheel();
-}
-
-
-// --------------------- wheel section --------------------------
 
 function setupCanvas(canvas) {
   const dpr = window.devicePixelRatio || 1;
@@ -188,12 +46,10 @@ function setupCanvas(canvas) {
   return { ctx, width: rect.width, height: rect.height };
 }
 
-function drawWheel() {
+function drawWheel(){
 
-    const lineWidth = 10; // Width of the lines between segments
-    const canvas = document.getElementById('wheelCanvas');
+    const lineWidth = 0; // Width of the lines between segments
 
-    /* removed for debugging
     const { ctx, width, height } = setupCanvas(canvas);
 
     const centerX = width / 2;
@@ -201,8 +57,6 @@ function drawWheel() {
     const radius = Math.min(width, height) / 2;
 
     ctx.clearRect(0, 0, width, height);
-
-    if (items.length === 0) return;
 
     const segmentAngle = (2 * Math.PI) / items.length;
     const startOffset = -Math.PI / 2;
@@ -232,7 +86,7 @@ function drawWheel() {
         ctx.translate(textX, textY);
         ctx.rotate(textAngle + Math.PI / 2);
         ctx.fillStyle = '#fff';
-        ctx.font = 'bold 14px Arial';
+        ctx.font = 'bold 44px Arial';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
@@ -255,57 +109,39 @@ function drawWheel() {
 
         ctx.restore();
     }); 
-    */
 }
 
+ function drawOnCanvas() {
+      const canvas = document.getElementById('wheelCanvas');
+      const ctx = canvas.getContext('2d');
 
-/*
-* spins the wheel --> still sometimes get wrong result
-*/
-function spinWheel() {
-    if (items.length === 0 || isSpinning) return;
+      // Match canvas resolution to display size for crisp rendering
+      const size = canvas.getBoundingClientRect().width;
+      canvas.width = size;
+      canvas.height = size;
 
-    isSpinning = true;
-    updateSpinButton();
+      const centerX = canvas.width / 2;
+      const centerY = canvas.height / 2;
+      const radius = canvas.width / 2 - 5;
 
-    const wheel = document.getElementById('wheel');
-    const segmentAngle = 360 / items.length;
+      // Clear canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Random angle between 0 and 360 degrees
-    const randomAngle = Math.random() * 360;
+      // Draw circle
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+      ctx.stroke();
 
-    // Total rotation is full rotations plus random angle
-    const finalAngle = currentAngle + 6 * 360 + randomAngle;       // TODO avoid magic constants
-  
-    // Apply rotation with smooth transition   TODO: make transition time configurable and more elegant
-    wheel.style.transition = 'transform 4s ease-out';
-    wheel.style.transform = `rotate(${finalAngle}deg)`;
+      // Draw X
+      const offset = radius * 0.6;
+      ctx.beginPath();
+      ctx.moveTo(centerX - offset, centerY - offset);
+      ctx.lineTo(centerX + offset, centerY + offset);
+      ctx.moveTo(centerX + offset, centerY - offset);
+      ctx.lineTo(centerX - offset, centerY + offset);
+      ctx.strokeStyle = '#000';
+      ctx.lineWidth = 5;
+      ctx.stroke();
+    }
 
-   
-    setTimeout(() => {
-        // Determine index of segment the pointer lands on
-        let selectedIndex = angle2index(randomAngle, currentAngle, items.length);
-
-        const selectedItem = items[selectedIndex];
-        currentWinner = selectedItem;
-        showResultPopup(selectedItem);
-
-        // Reset transition for next spin and fix wheel rotation angle to normalized angle
-        wheel.style.transition = 'none';
-        wheel.style.transform = `rotate(${finalAngle % 360}deg)`;
-
-        isSpinning = false;
-        updateSpinButton();
-
-        // save new angle
-        currentAngle = finalAngle % 360;
-    }, 4000);  
-}
-
-/*
- * Converts an angle in degrees to the corresponding index in the wheel
- */
-function angle2index(phi, phi_0, num_items) {
-    const segmentAngle = 360 / num_items;
-    return Math.floor(((phi + phi_0) % 360) / segmentAngle);
-}
+    drawOnCanvas();
