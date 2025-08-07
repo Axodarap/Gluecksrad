@@ -6,18 +6,15 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <h1 onclick="spinWheel();">Spin</h1>
+        <h1>Glücksrad v0.1</h1>
         <div class="wheel-container" id="wheelContainer">
             <div class="wheel-child wheel-pointer">
                 <!-- pointer, stays still, centered to wheel-container -->
             </div>
             <canvas class="wheel-child" id="wheelCanvas"></canvas>
-            <!--<div class="wheel-child circle" id="wheel">-->
-                <!-- actual spinning part, also centered to wheel-container-->
-                
-            </div>
+                <!-- actual spinning part, also centered to wheel-container-->    
+            <div class="wheel-child wheel-center" onclick="spinWheel();"></div>
         </div>
-        <button id="drawWheel" onclick="drawWheel();">Draw Wheel</button>
         <script src="main.js"></script>
     </body>
 </html>

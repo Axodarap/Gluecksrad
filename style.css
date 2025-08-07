@@ -1,11 +1,16 @@
+body {
+    font-family: 'SF Pro Display', sans-serif, Roboto; 
+     font-size: 42px;
+}
+
 h1 {
     text-align: center;
 }
 
-.wheel-container {     /* TODO: adjust size dynamically*/
-    margin: 0 auto;     
-    width: 1000px;
-    height: 1000px;     
+.wheel-container {     
+    margin: 0 auto;         /* Center it horizontally */     
+    width: 80vw;
+    aspect-ratio: 1;         /* Maintain a square aspect ratio */
     display: flex;     
     justify-content: center;     
     align-items: center;
@@ -30,7 +35,6 @@ h1 {
 .wheel-pointer {
     position: absolute;
     top: -5px;
-    left: 50%;
     transform: translateX(-50%);
     width: 0;
     height: 0;
@@ -38,6 +42,15 @@ h1 {
     border-right: 15px solid transparent;
     border-top: 25px solid #ff6b6b;
     z-index: 2;
+}
+
+.wheel-center {
+    position: absolute;
+    width: 5%;
+    aspect-ratio: 1 / 1;
+    background: #000000;
+    border-radius: 50%;
+    z-index: 5;
 }
 
 #wheelCanvas {

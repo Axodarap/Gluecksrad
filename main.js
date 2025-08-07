@@ -3,7 +3,7 @@ let items = [1, 2, 3, 4, 5,6,7,8,9,10,11,12,13];
 let canvas = document.getElementById('wheelCanvas');
 
 
-const colors = [
+const colorsold = [
   '#D84315', // Red
   '#388E3C', // Green
   '#FBC02D', // Yellow
@@ -111,37 +111,4 @@ function drawWheel(){
     }); 
 }
 
- function drawOnCanvas() {
-      const canvas = document.getElementById('wheelCanvas');
-      const ctx = canvas.getContext('2d');
-
-      // Match canvas resolution to display size for crisp rendering
-      const size = canvas.getBoundingClientRect().width;
-      canvas.width = size;
-      canvas.height = size;
-
-      const centerX = canvas.width / 2;
-      const centerY = canvas.height / 2;
-      const radius = canvas.width / 2 - 5;
-
-      // Clear canvas
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      // Draw circle
-      ctx.beginPath();
-      ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
-      ctx.stroke();
-
-      // Draw X
-      const offset = radius * 0.6;
-      ctx.beginPath();
-      ctx.moveTo(centerX - offset, centerY - offset);
-      ctx.lineTo(centerX + offset, centerY + offset);
-      ctx.moveTo(centerX + offset, centerY - offset);
-      ctx.lineTo(centerX - offset, centerY + offset);
-      ctx.strokeStyle = '#000';
-      ctx.lineWidth = 5;
-      ctx.stroke();
-    }
-
-    drawOnCanvas();
+drawWheel();
