@@ -12,8 +12,8 @@ h1 {
     grid-template-rows: 10% 40% 10% 40%;
     background: rgb(192, 187, 187);
     padding: 40px;
-    width: 100vw;            /* full viewport width */
-    height: 100vh;
+    width: 50vw;            /* full viewport width */
+    height: 50vh;
     box-sizing: border-box; /* include padding in width */
     text-align: center;
 }
@@ -126,6 +126,7 @@ input[type="text"]:focus {
     background-color: #f9f9f9;
     box-sizing: border-box;
     margin: 0 auto;
+
 }
 .item-list {
     display: flex;
@@ -141,7 +142,7 @@ input[type="text"]:focus {
     border: 2px solid rgba(102, 126, 234, 0.2);
     border-radius: 24px;
     padding: 12px 25px;
-    margin: 8px 8px;
+    margin: 5px 15px;
     display: flex;
     justify-content: space-between;
     align-items: center;

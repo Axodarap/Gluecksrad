@@ -14,9 +14,8 @@
                 <div class="wheel-child wheel-pointer">
                     <!-- pointer, stays still, centered to wheel-container -->
                 </div>
-                <canvas class="wheel-child" id="wheelCanvas"></canvas>
+                <canvas class="wheel-child" id="wheelCanvas" onclick="spinWheel();"></canvas>
                     <!-- actual spinning part, also centered to wheel-container-->    
-                <div class="wheel-child wheel-center" onclick="spinWheel();"></div>
             </div>
             <div class="input-container">
                 <input type="text" id="itemInput" placeholder="What would you like to spin?" maxlength="100">

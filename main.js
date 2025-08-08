@@ -1,5 +1,5 @@
 let currentRotation = 0;
-let items = [1,2,3,4,5,6,7,8,9];
+let items = [1,2,3,4,5,6,7,8];
 let canvas = document.getElementById('wheelCanvas');
 
 
@@ -88,7 +88,6 @@ function addItem() {
 function removeItem(index) {
     items.splice(index, 1);
     updateDisplay();
-    updateSpinButton();
 }
 
 function setupCanvas(canvas) {
@@ -172,7 +171,14 @@ function drawWheel(){
 
         ctx.restore();
     }); 
+    // Draw black center circle
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, radius * 0.1, 0, 2 * Math.PI);
+    ctx.fillStyle = '#000'; // black color
+    ctx.fill();
 }
+
+addEventListener("resize", (event) => {alert("resize detected") });
 
 drawWheel();
 updateDisplay();
