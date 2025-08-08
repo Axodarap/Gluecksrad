@@ -1,9 +1,9 @@
 let currentRotation = 0;
-let items = [1, 2, 3, 4, 5,6,7,8,9,10,11,12,13];
+let items = [1,2,3,4,5,6,7,8,9];
 let canvas = document.getElementById('wheelCanvas');
 
 
-const colorsold = [
+const colors = [
   '#D84315', // Red
   '#388E3C', // Green
   '#FBC02D', // Yellow
@@ -13,6 +13,8 @@ const colorsold = [
   '#C2185B', // Magenta
   '#009688'  // Teal
 ];
+
+let setSegmentOutlines = false; // Set to true to enable white outlines around segments
 
 function spinWheel() {
     const wheel = document.getElementById('wheelCanvas'); // Changed from 'wheelContainer' to 'wheel'
@@ -28,6 +30,65 @@ function spinWheel() {
         wheel.style.transition = 'none';
         wheel.style.transform = `translate(-50%, -50%) rotate(${currentRotation}deg)`;
     }, 4000);
+}
+
+function updateDisplay() {
+    const itemListContainer = document.getElementById('itemListContainer');
+    // Clear existing content
+    itemListContainer.innerHTML = '';
+    
+    if (items.length === 0) {
+        itemListContainer.innerHTML = '<div class="empty-list-message">No items added yet. Add some items to spin!</div>';
+        // TODO: handle wheel
+        return;
+    }
+    // Create the list container
+    const itemList = document.createElement('div');
+    itemList.className = 'item-list';
+    
+    items.forEach((item, index) => {
+        const itemEntry = document.createElement('div');
+        itemEntry.className = 'item-entry';
+        
+        // Item text
+        const itemText = document.createElement('div');
+        itemText.className = 'item-text';
+        itemText.textContent = item;
+        
+        // Remove button
+        const removeButton = document.createElement('button');
+        removeButton.className = 'btn-remove';
+        removeButton.textContent = '✕';
+        removeButton.onclick = () => removeItem(index);
+        
+        // Assemble the item entry
+        itemEntry.appendChild(itemText);
+        itemEntry.appendChild(removeButton);
+        
+        itemList.appendChild(itemEntry);
+    });
+    
+    itemListContainer.appendChild(itemList);
+
+    drawWheel();
+}
+
+function addItem() {
+    const input = document.getElementById('itemInput');
+    const value = input.value.trim();
+    
+    if (value) {
+        items.push(value);
+        input.value = '';
+        drawWheel();
+        populateItemList();
+    }
+}
+
+function removeItem(index) {
+    items.splice(index, 1);
+    updateDisplay();
+    updateSpinButton();
 }
 
 function setupCanvas(canvas) {
@@ -48,7 +109,7 @@ function setupCanvas(canvas) {
 
 function drawWheel(){
 
-    const lineWidth = 0; // Width of the lines between segments
+    const lineWidth = 5; // Width of the lines between segments
 
     const { ctx, width, height } = setupCanvas(canvas);
 
@@ -72,8 +133,10 @@ function drawWheel(){
         ctx.closePath();
         ctx.fillStyle = color;
         ctx.fill();
-
-        ctx.strokeStyle = '#fff';
+        if(setSegmentOutlines)
+            ctx.strokeStyle = '#fff';
+        else
+            ctx.strokeStyle = color;
         ctx.lineWidth = lineWidth;
         ctx.stroke();
 
@@ -112,3 +175,4 @@ function drawWheel(){
 }
 
 drawWheel();
+updateDisplay();

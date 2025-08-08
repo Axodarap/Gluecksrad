@@ -6,14 +6,25 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <h1>Glücksrad v0.1</h1>
-        <div class="wheel-container" id="wheelContainer">
-            <div class="wheel-child wheel-pointer">
-                <!-- pointer, stays still, centered to wheel-container -->
+        <div class="container">
+            <div class="header-container">
+                <h1>Glücksrad v0.1</h1>
             </div>
-            <canvas class="wheel-child" id="wheelCanvas"></canvas>
-                <!-- actual spinning part, also centered to wheel-container-->    
-            <div class="wheel-child wheel-center" onclick="spinWheel();"></div>
+            <div class="wheel-container" id="wheelContainer">
+                <div class="wheel-child wheel-pointer">
+                    <!-- pointer, stays still, centered to wheel-container -->
+                </div>
+                <canvas class="wheel-child" id="wheelCanvas"></canvas>
+                    <!-- actual spinning part, also centered to wheel-container-->    
+                <div class="wheel-child wheel-center" onclick="spinWheel();"></div>
+            </div>
+            <div class="input-container">
+                <input type="text" id="itemInput" placeholder="What would you like to spin?" maxlength="100">
+                <button class="btn btn-add" onclick="addItem()">Add</button>
+            </div>
+            <div class="item-list-container" id="itemListContainer">
+                <!-- List of added items will appear here -->
+            </div>
         </div>
         <script src="main.js"></script>
     </body>
