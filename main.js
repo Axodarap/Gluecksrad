@@ -178,9 +178,17 @@ function drawWheel(){
     ctx.fill();
 }
 
-addEventListener("resize", (event) => {
-    updateDisplay();
-});
+// Listen to both for full coverage
+if (window.visualViewport) {
+  window.visualViewport.addEventListener('resize', handleResize);
+}
+window.addEventListener('resize', handleResize);
 
-drawWheel();
+function handleResize() {
+  requestAnimationFrame(() => {
+    updateDisplay(); // safely use updated sizes here
+  });
+}
+
+
 updateDisplay();
