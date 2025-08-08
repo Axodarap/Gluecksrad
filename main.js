@@ -179,9 +179,9 @@ function drawWheel(){
 }
 
 // Listen to both for full coverage
-if (window.visualViewport) {
-  window.visualViewport.addEventListener('resize', handleResize);
-}
+//if (window.visualViewport) {
+//  window.visualViewport.addEventListener('resize', handleResize);
+//}
 window.addEventListener('resize', handleResize);
 
 function handleResize() {
