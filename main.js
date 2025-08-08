@@ -191,14 +191,4 @@ function handleResize() {
 }
 
 
-// TESTING
-function setContainerHeight() {
-  const container = document.querySelector('.container');
-  container.style.height = window.innerHeight + 'px';
-}
-
-window.addEventListener('resize', setContainerHeight);
-window.addEventListener('orientationchange', setContainerHeight);
-setContainerHeight();
-
 updateDisplay();

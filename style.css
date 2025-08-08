@@ -18,7 +18,7 @@ body {
     background: rgb(192, 187, 187);
     padding: 40px;
     width: 100%;           
-    /*height: 100vh;*/
+    height: 100vh;
     box-sizing: border-box; /* include padding in width */
     text-align: center;
 }
