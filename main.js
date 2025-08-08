@@ -70,7 +70,7 @@ function updateDisplay() {
     
     itemListContainer.appendChild(itemList);
 
-    drawWheel();
+    //drawWheel();
 }
 
 function addItem() {

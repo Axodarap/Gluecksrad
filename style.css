@@ -71,7 +71,8 @@ h1 {
 
 #wheelCanvas {
     height: 100%;
-    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
     display: block; /* removes extra bottom space in some browsers */
     object-fit: contain;
 
