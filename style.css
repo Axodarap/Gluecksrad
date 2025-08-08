@@ -3,7 +3,12 @@ body {
     font-size: 42px;
 }
 
-h1 {
+.header-container h1 {
+    max-width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    font-size: 5vh; /* scales with viewport width */
+    margin: 0;
     text-align: center;
 }
 
