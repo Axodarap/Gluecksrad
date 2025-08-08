@@ -12,8 +12,8 @@ h1 {
     grid-template-rows: 10% 40% 10% 40%;
     background: rgb(192, 187, 187);
     padding: 40px;
-    width: 50vw;            /* full viewport width */
-    height: 50vh;
+    width: 100vw;            /* full viewport width */
+    height: 100vh;
     box-sizing: border-box; /* include padding in width */
     text-align: center;
 }

@@ -178,7 +178,9 @@ function drawWheel(){
     ctx.fill();
 }
 
-addEventListener("resize", (event) => {alert("resize detected") });
+addEventListener("resize", (event) => {
+    updateDisplay();
+});
 
 drawWheel();
 updateDisplay();
