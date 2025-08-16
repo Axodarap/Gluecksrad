@@ -12,6 +12,7 @@ const wheelProps = {
   itemLabelFontSizeMax: 40,
   rotationResistance: -100,
   rotationSpeedMax: 1000,
+  isInteractive: false,
 };
 
 var wheel = new spinWheel.Wheel(wheelContainer, wheelProps);
