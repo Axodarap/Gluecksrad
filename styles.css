@@ -1,0 +1,31 @@
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #D9D9D9;
+}
+
+.wheel-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.edit-button{
+    position: fixed;   
+    bottom: 5vw;   /* 5% of viewport height */
+    right: 5vw;    /* 5% of viewport width */
+    width: 8vmin;  /* size also scales with viewport */
+    height: 8vmin;
+    background: white;
+    border-radius: 50%;
+}
+
+.demo-circle{
+    width: 20vmin;   /* scales with screen size */
+    height: 20vmin;
+    background: orange;
+    border-radius: 50%;
+    overflow: hidden;
+    }
