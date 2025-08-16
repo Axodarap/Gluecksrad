@@ -10,6 +10,8 @@ const wheelProps = {
   rotationResistance: -100,
   rotationSpeedMax: 1000,
   isInteractive: false,
+  lineWidth: 0,
+  borderWidth: 1,
 };
 
 var wheel = new spinWheel.Wheel(wheelContainer, wheelProps);
