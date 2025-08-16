@@ -21,11 +21,3 @@ body {
     background: white;
     border-radius: 50%;
 }
-
-.demo-circle{
-    width: 20vmin;   /* scales with screen size */
-    height: 20vmin;
-    background: orange;
-    border-radius: 50%;
-    overflow: hidden;
-    }
