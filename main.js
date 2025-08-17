@@ -2,38 +2,20 @@ import {Wheel} from 'https://cdn.jsdelivr.net/npm/spin-wheel@5.0.2/dist/spin-whe
 import * as config from './config.js';
 import {loadImages} from './util.js';
 
+
 /* ------------------------ global variables ------------------------ */
 
 let items = [];
-
-
-const emptyWheelOverlay = new Image();  
-emptyWheelOverlay.src = './img/empty-wheel-background.svg';
+let wheelProps = config.WHEEL_PROPS;
 
 
 const wheelContainer = document.getElementById("wheelContainer");
-const wheelProps = {
-  items: items,
-  radius: config.RADIUS,
-  itemBackgroundColors: config.ITEM_BG_COLORS,
-  itemLabelFontSizeMax: config.ITEM_LABEL_FONT_SIZE_MAX,
-  rotationResistance: config.ROTATION_RESISTANCE,
-  rotationSpeedMax: config.ROTATION_SPEED_MAX,
-  isInteractive: config.IS_INTERACTIVE,
-  lineWidth: config.LINE_WIDTH,
-  borderWidth: config.BORDER_WIDTH,
-  overlayImage: emptyWheelOverlay,
-};
-
-
-
 let wheel = new Wheel(wheelContainer, wheelProps);
 
-let images = [emptyWheelOverlay];
 
 window.onload = async () => {
 
-  await loadImages(images);
+  await loadImages(config.IMAGES);
 
   // Show the wheel container after loading
   document.getElementById("wheelContainer").style.visibility = "visible"; 
@@ -85,10 +67,10 @@ function removeItem(index) {
  */
 function updateOverlay(){
   if(items.length == 0){
-    wheelProps.overlayImage = images[0];  // TODO: fix this to not be a random index
+    wheelProps.overlayImage = config.IMAGES[0];  // TODO: fix this to not be a random index
   }
   else {
-    wheelProps.overlayImage = null; // also change to images[1] once ready
+    wheelProps.overlayImage = config.IMAGES[1]; // also change to images[1] once ready
   }
   wheel.init(wheelProps);
 }

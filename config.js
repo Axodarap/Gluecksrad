@@ -3,15 +3,26 @@
 */
 import { easeOutExpo, easeOutQuad } from './util.js';
 
+const emptyWheelOverlay = new Image();  
+const wheelOverlay = new Image();
+emptyWheelOverlay.src = './img/empty-wheel-background.svg';
+wheelOverlay.src = './img/wheel-overlay.svg';
+
+export const IMAGES = [emptyWheelOverlay, wheelOverlay];
+
 export const SPIN_DURATION = 10000;
 export const EASING_FUNCTION = easeOutQuad;
 
 /* wheel props */
-export const ITEM_BG_COLORS = ['#fff', '#6e0f0fff', '#2d2baaff'];
-export const ITEM_LABEL_FONT_SIZE_MAX = 40;
-export const ROTATION_RESISTANCE = -100;
-export const ROTATION_SPEED_MAX = 1000;
-export const IS_INTERACTIVE = false;
-export const LINE_WIDTH = 0;
-export const BORDER_WIDTH = 0;
-export const RADIUS = 0.84;
+export const WHEEL_PROPS = {
+  items: [],
+  radius: 0.84,
+  itemBackgroundColors: ['#fff', '#6e0f0fff', '#2d2baaff'],
+  itemLabelFontSizeMax: 40,
+  rotationResistance: -100,
+  rotationSpeedMax: 1000,
+  isInteractive: false,
+  lineWidth: 0,
+  borderWidth: 0,
+  overlayImage: IMAGES[0],
+};
