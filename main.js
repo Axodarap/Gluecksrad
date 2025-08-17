@@ -68,9 +68,11 @@ function removeItem(index) {
 function updateOverlay(){
   if(items.length == 0){
     wheelProps.overlayImage = config.IMAGES[0];  // TODO: fix this to not be a random index
+    document.getElementById("emptyWheelText").style.visibility = "visible";
   }
   else {
     wheelProps.overlayImage = config.IMAGES[1]; // also change to images[1] once ready
+    document.getElementById("emptyWheelText").style.visibility = "hidden";
   }
   wheel.init(wheelProps);
 }
