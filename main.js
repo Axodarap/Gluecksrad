@@ -1,6 +1,8 @@
 import {Wheel} from 'https://cdn.jsdelivr.net/npm/spin-wheel@5.0.2/dist/spin-wheel-esm.js';
 import { easeOutExpo, easeOutQuad } from './util.js';
 
+/* ------------------------ global variables ------------------------ */
+
 let items = [];
 
 const wheelContainer = document.getElementById("wheelContainer");
@@ -16,7 +18,10 @@ const wheelProps = {
 };
 
 var wheel = new Wheel(wheelContainer, wheelProps);
-
+/* ------------------------ functions ------------------------ */
+/**
+ * Picks a random item from the wheel.
+ */
 function pickItem(){
   const winningIndex = Math.floor(Math.random() * items.length);
   const duration = 10000;
