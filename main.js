@@ -2,7 +2,7 @@
 
 let items = [];
 
-const wheelContainer = document.getElementById("wheel-container");
+const wheelContainer = document.getElementById("wheelContainer");
 const wheelProps = {
   items: items,
   itemBackgroundColors: ['#fff', '#6e0f0fff', '#2d2baaff'],
@@ -56,3 +56,11 @@ function easeOutExpo( t ) {
 function easeOutQuad( t ) {
     return t * ( 2 - t );
 }
+
+
+/* ----------------- event listeners ----------------------- */
+document.getElementById("editButton").addEventListener("click", function() {
+  addItem('test');
+});
+
+document.getElementById("wheelContainer").addEventListener("click", pickItem);
