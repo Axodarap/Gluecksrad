@@ -1,3 +1,4 @@
+import {Wheel} from 'https://cdn.jsdelivr.net/npm/spin-wheel@5.0.2/dist/spin-wheel-esm.js';
 
 
 let items = [];
@@ -14,7 +15,7 @@ const wheelProps = {
   borderWidth: 1,
 };
 
-var wheel = new spinWheel.Wheel(wheelContainer, wheelProps);
+var wheel = new Wheel(wheelContainer, wheelProps);
 
 function pickItem(){
   const winningIndex = Math.floor(Math.random() * items.length);
