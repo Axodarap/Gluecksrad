@@ -1,9 +1,15 @@
 import {Wheel} from 'https://cdn.jsdelivr.net/npm/spin-wheel@5.0.2/dist/spin-wheel-esm.js';
 import * as config from './config.js';
+import {loadImages} from './util.js';
 
 /* ------------------------ global variables ------------------------ */
 
 let items = [];
+
+
+const emptyWheelImg = new Image();  //TODO: handle loading
+emptyWheelImg.src = './img/test_overlay.svg';
+
 
 const wheelContainer = document.getElementById("wheelContainer");
 const wheelProps = {
@@ -15,10 +21,25 @@ const wheelProps = {
   isInteractive: config.IS_INTERACTIVE,
   lineWidth: config.LINE_WIDTH,
   borderWidth: config.BORDER_WIDTH,
+  overlayImage: emptyWheelImg,
 };
 
+
+
+
 var wheel = new Wheel(wheelContainer, wheelProps);
+
 /* ------------------------ functions ------------------------ */
+
+
+function initImage(obj, pName) {
+    if (!obj[pName]) return null;
+    const i = new Image();
+    i.src = obj[pName];
+    obj[pName] = i;
+    return i;
+  }
+
 /**
  * Picks a random item from the wheel.
  */

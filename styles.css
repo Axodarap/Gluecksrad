@@ -1,4 +1,13 @@
 body {
+     overscroll-behavior-y: contain;
+
+    /* Prevent iOS rubber-band effect */
+  
+    width: 100%;
+
+    /* Prevent browser from handling touch events */
+    touch-action: none;
+
     font-family: 'Inter', sans-serif;
     margin: 0;
     padding: 0;
