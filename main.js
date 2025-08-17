@@ -1,5 +1,5 @@
 import {Wheel} from 'https://cdn.jsdelivr.net/npm/spin-wheel@5.0.2/dist/spin-wheel-esm.js';
-
+import { easeOutExpo, easeOutQuad } from './util.js';
 
 let items = [];
 
@@ -41,23 +41,6 @@ function removeItem(index) {
   wheelProps.items.splice(index, 1);
   wheel.init(wheelProps);
 }
-
-
-/* easing functions TODO: move to module */
-function easeOutExpo( t ) {
-
-    if( t === 1 ) {
-        return 1;
-    }
-
-    return ( -Math.pow( 2, -10 * t ) + 1 );
-
-}
-
-function easeOutQuad( t ) {
-    return t * ( 2 - t );
-}
-
 
 /* ----------------- event listeners ----------------------- */
 document.getElementById("editButton").addEventListener("click", function() {
