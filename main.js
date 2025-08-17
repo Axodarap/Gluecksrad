@@ -7,13 +7,14 @@ import {loadImages} from './util.js';
 let items = [];
 
 
-const emptyWheelImg = new Image();  //TODO: handle loading
-emptyWheelImg.src = './img/test_overlay.svg';
+const emptyWheelImg = new Image();  //TODO: handle loading (see themes example for this)
+emptyWheelImg.src = './img/empty-wheel-background.svg';
 
 
 const wheelContainer = document.getElementById("wheelContainer");
 const wheelProps = {
   items: items,
+  radius: config.RADIUS,
   itemBackgroundColors: config.ITEM_BG_COLORS,
   itemLabelFontSizeMax: config.ITEM_LABEL_FONT_SIZE_MAX,
   rotationResistance: config.ROTATION_RESISTANCE,
@@ -30,16 +31,6 @@ const wheelProps = {
 var wheel = new Wheel(wheelContainer, wheelProps);
 
 /* ------------------------ functions ------------------------ */
-
-
-function initImage(obj, pName) {
-    if (!obj[pName]) return null;
-    const i = new Image();
-    i.src = obj[pName];
-    obj[pName] = i;
-    return i;
-  }
-
 /**
  * Picks a random item from the wheel.
  */

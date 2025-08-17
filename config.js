@@ -14,3 +14,4 @@ export const ROTATION_SPEED_MAX = 1000;
 export const IS_INTERACTIVE = false;
 export const LINE_WIDTH = 0;
 export const BORDER_WIDTH = 1;
+export const RADIUS = 0.84;
