@@ -1,25 +1,52 @@
+import {Wheel} from 'https://cdn.jsdelivr.net/npm/spin-wheel@5.0.2/dist/spin-wheel-esm.js';
+import * as config from './config.js';
+import {loadImages} from './util.js';
 
+/* ------------------------ global variables ------------------------ */
 
 let items = [];
 
-const wheelContainer = document.getElementById("wheel-container");
+
+const emptyWheelImg = new Image();  //TODO: handle loading
+emptyWheelImg.src = './img/test_overlay.svg';
+
+
+const wheelContainer = document.getElementById("wheelContainer");
 const wheelProps = {
   items: items,
-  itemBackgroundColors: ['#fff', '#6e0f0fff', '#2d2baaff'],
-  itemLabelFontSizeMax: 40,
-  rotationResistance: -100,
-  rotationSpeedMax: 1000,
-  isInteractive: false,
-  lineWidth: 0,
-  borderWidth: 1,
+  itemBackgroundColors: config.ITEM_BG_COLORS,
+  itemLabelFontSizeMax: config.ITEM_LABEL_FONT_SIZE_MAX,
+  rotationResistance: config.ROTATION_RESISTANCE,
+  rotationSpeedMax: config.ROTATION_SPEED_MAX,
+  isInteractive: config.IS_INTERACTIVE,
+  lineWidth: config.LINE_WIDTH,
+  borderWidth: config.BORDER_WIDTH,
+  overlayImage: emptyWheelImg,
 };
 
-var wheel = new spinWheel.Wheel(wheelContainer, wheelProps);
 
+
+
+var wheel = new Wheel(wheelContainer, wheelProps);
+
+/* ------------------------ functions ------------------------ */
+
+
+function initImage(obj, pName) {
+    if (!obj[pName]) return null;
+    const i = new Image();
+    i.src = obj[pName];
+    obj[pName] = i;
+    return i;
+  }
+
+/**
+ * Picks a random item from the wheel.
+ */
 function pickItem(){
   const winningIndex = Math.floor(Math.random() * items.length);
-  const duration = 10000;
-  wheel.spinToItem(winningIndex, duration, true, 4, 1, easeOutQuad);
+  const duration = config.SPIN_DURATION;
+  wheel.spinToItem(winningIndex, duration, true, 4, 1, config.EASING_FUNCTION);
   let selItem = items[winningIndex];
   console.log(selItem.label);
 }
@@ -41,18 +68,8 @@ function removeItem(index) {
   wheel.init(wheelProps);
 }
 
-
-/* easing functions TODO: move to module */
-function easeOutExpo( t ) {
-
-    if( t === 1 ) {
-        return 1;
-    }
-
-    return ( -Math.pow( 2, -10 * t ) + 1 );
-
-}
-
-function easeOutQuad( t ) {
-    return t * ( 2 - t );
-}
+/* ----------------- event listeners ----------------------- */
+document.getElementById("editButton").addEventListener("click", function() {
+  addItem('test');
+});
+document.getElementById("wheelContainer").addEventListener("click", pickItem);
