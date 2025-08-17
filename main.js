@@ -7,8 +7,8 @@ import {loadImages} from './util.js';
 let items = [];
 
 
-const emptyWheelImg = new Image();  //TODO: handle loading (see themes example for this)
-emptyWheelImg.src = './img/empty-wheel-background.svg';
+const emptyWheelOverlay = new Image();  
+emptyWheelOverlay.src = './img/empty-wheel-background.svg';
 
 
 const wheelContainer = document.getElementById("wheelContainer");
@@ -22,14 +22,14 @@ const wheelProps = {
   isInteractive: config.IS_INTERACTIVE,
   lineWidth: config.LINE_WIDTH,
   borderWidth: config.BORDER_WIDTH,
-  overlayImage: emptyWheelImg,
+  overlayImage: emptyWheelOverlay,
 };
 
 
 
 let wheel = new Wheel(wheelContainer, wheelProps);
 
-let images = [emptyWheelImg];
+let images = [emptyWheelOverlay];
 
 window.onload = async () => {
 
