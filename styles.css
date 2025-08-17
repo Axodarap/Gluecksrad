@@ -26,6 +26,17 @@ body {
     visibility: hidden; /* Initially hidden */
 }
 
+.empty-wheel-text{
+    grid-column: 1;
+    grid-row: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #D9D9D9;
+    font-size: 24px;
+}
+
 .edit-button{
     position: fixed;   
     bottom: 5vw;   /* 5% of viewport height */
