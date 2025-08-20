@@ -6,7 +6,6 @@ import {loadImages} from './util.js';
 /* ------------------------ global variables ------------------------ */
 
 let items = [];
-let itemList = [];  // holding the list elements to be displayed
 let wheelProps = config.WHEEL_PROPS;
 let activeScreen = "mainScreen";
 
@@ -51,13 +50,13 @@ function pickItem(){
  * Adds a new item to the wheel.
  */
 function addItem(item){
-   if(!item) return;
+  if(!item) return;
    
   // add item to wheel
   items.push({label: item})
   wheelProps.items = items;
 
-  // ADD ITEM TO LIST
+  // get ui elements
   const itemInput = document.getElementById('addItemInput');
   const itemList = document.getElementById("itemList"); 
   
@@ -75,13 +74,7 @@ function addItem(item){
   button.className = "remove-item-button";
   button.textContent = "×";
 
-  // store this item's index in a data attribute
-    const index = wheelProps.items.length - 1;
-    newItem.dataset.index = index;
-
-  button.addEventListener("click", () => {
-      removeItem(index, newItem);
-  });
+  button.addEventListener("click", () => removeItem(newItem));
 
   // assemble the item
   newItem.appendChild(span);
@@ -98,20 +91,22 @@ function addItem(item){
 /**
  * Removes an item from the wheel.
  */
-function removeItem(index, element) {
-    // 1. Remove from wheel
-    wheelProps.items.splice(index, 1);
-    wheel.init(wheelProps);
+function removeItem(item) {
+    if (!item) return;
 
-    // 2. Remove from list (DOM)
-    element.remove();
+    // Get the label text from the DOM element
+    const label = item.querySelector(".item-text").textContent;
 
-    // 3. Re-sync the indices of the remaining list items   TODO: understand this
-    const items = document.querySelectorAll("#itemsList .item");
-    items.forEach((el, i) => {
-        el.dataset.index = i;
-        el.querySelector("button").onclick = () => removeItem(i, el);
-    });
+    // Remove from the JS array
+    const index = items.findIndex(obj => obj.label === label);
+    if (index !== -1) {
+        items.splice(index, 1);
+        wheelProps.items = items; // update wheelProps
+        wheel.init(wheelProps);   // reinitialize wheel
+    }
+
+    // Remove from the DOM
+    item.remove();
 }
 
 /**
