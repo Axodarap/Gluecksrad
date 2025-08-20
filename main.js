@@ -7,6 +7,7 @@ import {loadImages} from './util.js';
 
 let items = [];
 let wheelProps = config.WHEEL_PROPS;
+let activeScreen = "mainScreen";
 
 
 const wheelContainer = document.getElementById("wheelContainer");
@@ -28,6 +29,10 @@ document.getElementById("editButton").addEventListener("click", function() {
   addItem('test');
 });
 document.getElementById("wheelContainer").addEventListener("click", pickItem);
+
+document.getElementById("debugReturnButton").addEventListener("click", toggleScreens);
+document.getElementById("wheelContainer").addEventListener("click", toggleScreens); // DEBUGGING
+
 
 /* ------------------------ functions ------------------------ */
 /**
@@ -76,4 +81,23 @@ function updateOverlay(){
   }
   wheel.init(wheelProps);
 }
+
+
+/* ------------------------ addItems stuff ------------------------ */
+function toggleScreens(){
+  let mainScreen = document.getElementById("mainScreen");
+  let secondaryScreen = document.getElementById("secondaryScreen");
+
+  if(activeScreen === "mainScreen") {
+    mainScreen.style.display = "none"; 
+    secondaryScreen.style.display = "grid";
+    activeScreen = "secondaryScreen";
+  } else {
+    mainScreen.style.display = "grid"; 
+    secondaryScreen.style.display = "none";
+    activeScreen = "mainScreen";
+  }
+}
+
+
 

@@ -1,18 +1,25 @@
 body {
-     overscroll-behavior-y: contain;
-
-    /* Prevent iOS rubber-band effect */
-  
-    width: 100%;
-
-    /* Prevent browser from handling touch events */
-    touch-action: none;
-
+    overscroll-behavior-y: contain;
+    width: 100%;    /* Prevent iOS rubber-band effect */
+    touch-action: none; /* Prevent browser from handling touch events */
     font-family: 'Inter', sans-serif;
     margin: 0;
     padding: 0;
     background-color: #D9D9D9;
     display: grid;
+}
+
+.screen{
+    display: grid;
+    height: 100%;  /* fill full screen */
+    width: 100%;
+
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.secondary-screen{
+    display: none; /* Initially hidden */
 }
 
 .wheel-container {
@@ -64,4 +71,42 @@ body {
     border-radius: 50%;
     border: 5px dashed #000000;
     margin: auto;
+}
+
+
+/* --------------- add items stuff ----------------- */
+
+.add-items-overlay {
+     height: 100%;
+        width: 0;
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        left: 0;
+        top: 0;
+}
+
+.overlay-header{
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px; 
+}
+
+.close-overlay-button {
+    background-color: #d97b8a;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.debug-return-button{
+    grid-column: 1;
+    grid-row: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

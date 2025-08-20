@@ -7,13 +7,22 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     </head>
     <body>
-        <div class="wheel-container" id="wheelContainer"></div>
-        <div class="empty-wheel-text" id="emptyWheelText">
-            looking pretty empty here...
+        <div class="screen" id="mainScreen">
+            <div class="wheel-container" id="wheelContainer"></div>
+            <div class="empty-wheel-text" id="emptyWheelText">
+                looking pretty empty here...
+            </div>
+            <div class="edit-button" id="editButton">
+                <i class="fa-solid fa-pen"></i>
+            </div>
         </div>
-        <div class="edit-button" id="editButton">
-            <i class="fa-solid fa-pen"></i>
+
+        <div class="screen secondary-screen" id="secondaryScreen">
+            
+                <div class="debug-return-button" id="debugReturnButton">BACK</div>
+            
         </div>
+        
 
         <script type="module" src="main.js"></script>
     </body>
