@@ -18,10 +18,6 @@ body {
     grid-row: 1;
 }
 
-.secondary-screen{
-    display: none; /* Initially hidden */
-}
-
 .wheel-container {
     grid-column: 1;
     grid-row: 1;
@@ -75,6 +71,10 @@ body {
 
 
 /* --------------- add items stuff ----------------- */
+.secondary-screen{
+    display: none; /* Initially hidden */
+    flex-direction: column;
+}
 
 .add-items-overlay {
      height: 100%;
@@ -85,28 +85,19 @@ body {
         top: 0;
 }
 
-.overlay-header{
+.add-item-header{
     display: flex;
     justify-content: flex-end;
     padding: 20px; 
 }
 
-.close-overlay-button {
-    background-color: #d97b8a;
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 25px;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
 
-.debug-return-button{
-    grid-column: 1;
-    grid-row: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.add-item-back-button{
+    background-color: #CF6679;
+    color: black;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
 }

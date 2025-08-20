@@ -30,7 +30,7 @@ document.getElementById("editButton").addEventListener("click", function() {
 });
 document.getElementById("wheelContainer").addEventListener("click", pickItem);
 
-document.getElementById("debugReturnButton").addEventListener("click", toggleScreens);
+document.getElementById("addItemBackButton").addEventListener("click", toggleScreens);
 document.getElementById("wheelContainer").addEventListener("click", toggleScreens); // DEBUGGING
 
 
@@ -90,7 +90,7 @@ function toggleScreens(){
 
   if(activeScreen === "mainScreen") {
     mainScreen.style.display = "none"; 
-    secondaryScreen.style.display = "grid";
+    secondaryScreen.style.display = "flex";
     activeScreen = "secondaryScreen";
   } else {
     mainScreen.style.display = "grid"; 
