@@ -40,7 +40,7 @@ body {
     font-size: 24px;
 }
 
-.edit-button{
+.edit-wheel-button{
     position: fixed;   
     bottom: 5vw;   /* 5% of viewport height */
     right: 5vw;    /* 5% of viewport width */
@@ -91,8 +91,7 @@ body {
     padding: 20px; 
 }
 
-
-.add-item-back-button{
+.close-add-item-button{
     background-color: #CF6679;
     color: black;
     border: none;
@@ -100,4 +99,94 @@ body {
     border-radius: 20px;
     font-size: 14px;
     cursor: pointer;
+}
+
+.item-list-container {
+    flex: 1;
+    padding: 0 20px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.item-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 40px;
+}
+
+.item {
+    background-color: #282F3D;
+    color: white;
+    padding: 20px 24px;
+    border-radius: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    animation: slideIn 0.3s ease-out;
+}
+
+.item-text {
+    flex: 1;
+    margin-right: 15px;
+    word-break: break-word;
+}
+
+.remove-item-button {
+    background-color: #DF4343;
+    color: white;
+    border: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 20%;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+    flex-shrink: 0;
+}
+
+
+.add-item-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #e5e5e5;
+    padding: 20px;
+    display: flex;
+    gap: 12px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.add-item-input {
+    flex: 1;
+    background-color: #3a4750;
+    color: white;
+    border: none;
+    padding: 20px 24px;
+    border-radius: 30px;
+    font-size: 16px;
+    outline: none;
+}
+
+.add-item-input::placeholder {
+    color: #D9D9D9;
+}
+
+.add-item-button {
+    background-color: #7db3a8;
+    color: white;
+    border: none;
+    padding: 20px 30px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
 }

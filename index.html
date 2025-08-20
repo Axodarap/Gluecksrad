@@ -12,16 +12,31 @@
             <div class="empty-wheel-text" id="emptyWheelText">
                 looking pretty empty here...
             </div>
-            <div class="edit-button" id="editButton">
+            <div class="edit-wheel-button" id="editWheelButton">
                 <i class="fa-solid fa-pen"></i>
             </div>
         </div>
 
         <div class="screen secondary-screen" id="secondaryScreen">
             <div class="add-item-header">
-                <button class="add-item-back-button", id="addItemBackButton">BACK</button>
+                <button class="close-add-item-button" id="CloseAddItemButton">BACK</button>
             </div>
 
+            <div class ="item-list-container" id="itemListContainer">
+                <div class="item-list" id="itemList">
+                    <!-- Item list will be populated here -->
+                </div>
+            </div>
+            <div class="add-item-container" id="addItemContainer">
+                 <input 
+                    type="text" 
+                    class="add-item-input" 
+                    placeholder="what would you like to add..."
+                    id="addItemInput"
+                    onkeypress="handleKeyPress(event)"
+                >
+                <button class="add-item-button" id="addItemButton">ADD</button>
+            </div>
             
         </div>
         

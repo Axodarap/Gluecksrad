@@ -7,6 +7,7 @@ using: https://github.com/CrazyTim/spin-wheel
 - [ ] second screen slide in
 
 - [ ] fix image loading issue
+- [ ] understand/refactor removItem()
 
 - [ ] button hovering
 - [ ] remove black background from pointer
