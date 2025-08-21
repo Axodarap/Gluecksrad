@@ -144,6 +144,8 @@ function toggleScreens(){
     mainScreen.style.display = "none"; 
     secondaryScreen.style.display = "flex";
     activeScreen = "secondaryScreen";
+    document.getElementById("addItemInput").focus();
+
   } else {
     mainScreen.style.display = "grid"; 
     secondaryScreen.style.display = "none";
