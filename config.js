@@ -17,7 +17,7 @@ export const EASING_FUNCTION = easeOutQuad;
 export const WHEEL_PROPS = {
   items: [],
   radius: 0.84,
-  itemBackgroundColors: ['#fff', '#6e0f0fff', '#2d2baaff'],
+  itemBackgroundColors: ['#5773B3', '#E0984C', '#4EB39F'],
   itemLabelFontSizeMax: 40,
   rotationResistance: -100,
   rotationSpeedMax: 1000,
