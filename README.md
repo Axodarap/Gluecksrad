@@ -2,7 +2,8 @@
 using: https://github.com/CrazyTim/spin-wheel
 
 # TODO
-- [ ] implement second screen to add items
+- [ ] fix add items phone layout 
+- [ ] store items upon reload
 
 - [ ] second screen slide in
 
