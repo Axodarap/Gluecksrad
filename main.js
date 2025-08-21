@@ -36,6 +36,11 @@ document.getElementById("CloseAddItemButton").addEventListener("click", toggleSc
 document.getElementById("addItemButton").addEventListener("click", function() {
   addItem(document.getElementById("addItemInput").value);
 });
+document.getElementById("addItemInput").addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    addItem(document.getElementById("addItemInput").value);
+  }
+});
 
 /* ------------------------ functions ------------------------ */
 /**
