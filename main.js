@@ -9,6 +9,8 @@ let items = [];
 let wheelProps = config.WHEEL_PROPS;
 let activeScreen = "mainScreen";
 
+let currentWinner = null;
+
 const wheelContainer = document.getElementById("wheelContainer");
 let wheel = new Wheel(wheelContainer, wheelProps);
 
@@ -32,7 +34,7 @@ document.getElementById("wheelContainer").addEventListener("click", pickItem);
 document.getElementById("editWheelButton").addEventListener("click", toggleScreens);
 
 document.getElementById("btnModalClose").addEventListener("click", closeWinnerModal);
-document.getElementById("btnRemoveWinner").addEventListener("click", () => removeWinner(winner));
+document.getElementById("btnRemoveWinner").addEventListener("click", removeWinner);
 
 document.getElementById("CloseAddItemButton").addEventListener("click", toggleScreens);
 
@@ -54,9 +56,10 @@ function pickItem(){
   const duration = config.SPIN_DURATION;
   wheel.spinToItem(winningIndex, duration, true, 4, 1, config.EASING_FUNCTION);
   let selItem = items[winningIndex];
-  console.log(selItem.label);
+  console.log(selItem);
 
-  openWinnerModal(selItem.label);
+  currentWinner = selItem;
+  openWinnerModal(selItem);
 }
 
 /**
@@ -179,10 +182,11 @@ function openWinnerModal(winner) {
 /* Closes the winner modal. */
 function closeWinnerModal() {
   document.getElementById("resultsModal").style.display = "none";
+  updateWheelUI();
 }
 
-function removeWinner(winner) {
-  removeItem(winner);
+function removeWinner() {
+  removeItem(currentWinner);
 
   closeWinnerModal();
 }
