@@ -74,6 +74,7 @@ body {
 .secondary-screen{
     display: none; /* Initially hidden */
     flex-direction: column;
+    
 }
 
 .add-items-overlay {
@@ -160,7 +161,6 @@ body {
     padding: 20px;
     display: flex;
     gap: 12px;
-    max-width: 500px;
     margin: 0 auto;
 }
 
