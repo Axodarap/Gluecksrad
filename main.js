@@ -105,8 +105,14 @@ function removeItem(item) {
         wheel.init(wheelProps);   // reinitialize wheel
     }
 
+    // Add removing class for animation
+    item.classList.add('removing');
+
     // Remove from the DOM
-    item.remove();
+    setTimeout(() => {
+      item.remove();
+    }, config.REMOVE_ITEM_DELAY);
+    
 }
 
 /**

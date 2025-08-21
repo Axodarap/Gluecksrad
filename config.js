@@ -26,3 +26,6 @@ export const WHEEL_PROPS = {
   borderWidth: 0,
   overlayImage: IMAGES[0],
 };
+
+/* add item screen */
+export const REMOVE_ITEM_DELAY = 300;   // care, when changing this .item.removing style has to be adjusted as well

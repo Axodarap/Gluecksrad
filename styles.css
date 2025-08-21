@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
 }
 
 .screen{
@@ -27,11 +28,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 100%;
+    width: 100%;
     color: #D9D9D9;
-    font-size: 24px;
-
-    position: absolute; /* Position absolutely within wheel-container */
+    font-size: 5vw;
+    position: absolute; 
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -39,9 +40,9 @@
 
 .edit-wheel-button{
     position: fixed;   
-    bottom: 5vw;   /* 5% of viewport height */
-    right: 5vw;    /* 5% of viewport width */
-    width: 15vmin;  /* size also scales with viewport */
+    bottom: 5vw;  
+    right: 5vw;   
+    width: 15vmin;  /* size scales with viewport */
     height: 15vmin;
     background: #D9D9D9;
     color: #282F3D;
@@ -122,7 +123,11 @@
     justify-content: space-between;
     align-items: center;
     font-size: 16px;
-    animation: slideIn 0.3s ease-out;
+    animation: slideIn 0.3s ease-out;   /* animation when adding item */
+}
+
+.item.removing {
+    animation: slideOut 0.3s ease-in forwards;
 }
 
 .item-text {
@@ -187,4 +192,32 @@
     font-weight: 600;
     cursor: pointer;
     transition: background-color 0.2s;
+}
+
+
+/* Animation styles */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.item.removing {
+    animation: slideOut 0.3s ease-in forwards;
+}
+
+@keyframes slideOut {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
 }
