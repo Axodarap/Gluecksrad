@@ -9,7 +9,8 @@ let items = [];
 let wheelProps = config.WHEEL_PROPS;
 let activeScreen = "mainScreen";
 
-
+const wheelContainer = document.getElementById("wheelContainer");
+let wheel = new Wheel(wheelContainer, wheelProps);
 
 
 
@@ -18,10 +19,9 @@ window.onload = async () => {
   await loadImages(config.IMAGES);
 
   // Initialize wheel with props after loading
-  const wheelContainer = document.getElementById("wheelContainer");
-  let wheel = new Wheel(wheelContainer, wheelProps);
+  wheel.init(wheelProps);
 
-  // Show the wheel container 
+  // Show the wheel container after loading
   document.getElementById("wheelContainer").style.visibility = "visible"; 
 }
 
@@ -152,6 +152,5 @@ function toggleScreens(){
     updateWheelUI();
   }
 }
-
 
 
