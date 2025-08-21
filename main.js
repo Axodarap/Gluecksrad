@@ -29,8 +29,11 @@ window.onload = async () => {
 
 /* ----------------- event listeners ----------------------- */
 document.getElementById("wheelContainer").addEventListener("click", pickItem);
-
 document.getElementById("editWheelButton").addEventListener("click", toggleScreens);
+
+document.getElementById("btnModalClose").addEventListener("click", closeWinnerModal);
+document.getElementById("btnRemoveWinner").addEventListener("click", () => removeWinner(winner));
+
 document.getElementById("CloseAddItemButton").addEventListener("click", toggleScreens);
 
 document.getElementById("addItemButton").addEventListener("click", function() {
@@ -52,6 +55,8 @@ function pickItem(){
   wheel.spinToItem(winningIndex, duration, true, 4, 1, config.EASING_FUNCTION);
   let selItem = items[winningIndex];
   console.log(selItem.label);
+
+  openWinnerModal(selItem.label);
 }
 
 /**
@@ -61,7 +66,7 @@ function addItem(item){
   if(!item) return;
    
   // add item to wheel
-  items.push({label: item})
+  items.push(item);
   wheelProps.items = items;
 
   // get ui elements
@@ -82,7 +87,7 @@ function addItem(item){
   button.className = "remove-item-button";
   button.textContent = "×";
 
-  button.addEventListener("click", () => removeItem(newItem));
+  button.addEventListener("click", () => removeItem(item));
 
   // assemble the item
   newItem.appendChild(span);
@@ -98,29 +103,27 @@ function addItem(item){
 
 /**
  * Removes an item from the wheel.
+ * @param {string} item - item to remove.
  */
 function removeItem(item) {
-    if (!item) return;
+   
+  // Remove from the JS array
+  const index = items.indexOf(item);
+  if (index !== -1) {
+      items.splice(index, 1);
+  }
 
-    // Get the label text from the DOM element
-    const label = item.querySelector(".item-text").textContent;
+  // Find the DOM element based on its text content
+  const itemList = document.getElementById("itemList");
+  const itemElement = Array.from(itemList.querySelectorAll(".item"))
+    .find(el => el.querySelector(".item-text")?.textContent === item);
 
-    // Remove from the JS array
-    const index = items.findIndex(obj => obj.label === label);
-    if (index !== -1) {
-        items.splice(index, 1);
-        wheelProps.items = items; // update wheelProps
-        wheel.init(wheelProps);   // reinitialize wheel
-    }
-
-    // Add removing class for animation
-    item.classList.add('removing');
-
-    // Remove from the DOM
+  if (itemElement) {
+    itemElement.classList.add("removing");
     setTimeout(() => {
-      item.remove();
+      itemElement.remove();
     }, config.REMOVE_ITEM_DELAY);
-    
+  } 
 }
 
 /**
@@ -136,6 +139,10 @@ function updateWheelUI(){
     wheelProps.overlayImage = config.IMAGES[1]; // also change to images[1] once ready
     document.getElementById("emptyWheelText").style.visibility = "hidden";
   }
+
+  // load items into wheelProps
+  wheelProps.items = items.map(item => ({ label: item }));
+
   wheel.init(wheelProps);
 }
 
@@ -160,4 +167,22 @@ function toggleScreens(){
   }
 }
 
+/* ------------------------- winner modal -------------------------*/
+/* Opens a modal to display the winner.
+ * @param {string} winner - The label of the winning item.
+ */
+function openWinnerModal(winner) {
+  document.getElementById("winnerTitle").textContent = winner;
+  document.getElementById("resultsModal").style.display = "flex";
+}
 
+/* Closes the winner modal. */
+function closeWinnerModal() {
+  document.getElementById("resultsModal").style.display = "none";
+}
+
+function removeWinner(winner) {
+  removeItem(winner);
+
+  closeWinnerModal();
+}

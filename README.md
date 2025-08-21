@@ -4,8 +4,9 @@ using: https://github.com/CrazyTim/spin-wheel
 # TODO
 - [ ] result modal
 - [ ] second screen slide in
-- [ ] understand/refactor removeItem()
+- [ ] understand removeItem() - how removal is linked to each list entry
 
+- [ ] refactor the whole item managment, not very intuitive
 
 - [ ] button hovering
 - [ ] remove black background from pointer
