@@ -13,6 +13,8 @@ export const IMAGES = [emptyWheelOverlay, wheelOverlay];
 export const SPIN_DURATION = 10000;
 export const EASING_FUNCTION = easeOutQuad;
 
+export const WINNER_REVEAL_DELAY = 500;
+
 /* wheel props */
 export const WHEEL_PROPS = {
   items: [],

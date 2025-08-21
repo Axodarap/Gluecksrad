@@ -59,7 +59,9 @@ function pickItem(){
   console.log(selItem);
 
   currentWinner = selItem;
-  openWinnerModal(selItem);
+  setTimeout(() => {
+    openWinnerModal(selItem);
+  }, config.SPIN_DURATION + config.WINNER_REVEAL_DELAY);
 }
 
 /**
