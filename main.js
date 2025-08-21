@@ -10,15 +10,18 @@ let wheelProps = config.WHEEL_PROPS;
 let activeScreen = "mainScreen";
 
 
-const wheelContainer = document.getElementById("wheelContainer");
-let wheel = new Wheel(wheelContainer, wheelProps);
+
 
 
 window.onload = async () => {
 
   await loadImages(config.IMAGES);
 
-  // Show the wheel container after loading
+  // Initialize wheel with props after loading
+  const wheelContainer = document.getElementById("wheelContainer");
+  let wheel = new Wheel(wheelContainer, wheelProps);
+
+  // Show the wheel container 
   document.getElementById("wheelContainer").style.visibility = "visible"; 
 }
 
