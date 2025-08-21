@@ -38,6 +38,8 @@ document.getElementById("btnRemoveWinner").addEventListener("click", removeWinne
 
 document.getElementById("CloseAddItemButton").addEventListener("click", toggleScreens);
 
+document.getElementById("ClearButton").addEventListener("click", clearItems);
+
 document.getElementById("addItemButton").addEventListener("click", function() {
   addItem(document.getElementById("addItemInput").value);
 });
@@ -151,6 +153,10 @@ function updateWheelUI(){
   wheel.init(wheelProps);
 }
 
+function clearItems(){
+  items.length = 0;
+  console.log("Cleared all items from the wheel.");
+}
 
 /* ------------------------ addItems stuff ------------------------ */
 function toggleScreens(){

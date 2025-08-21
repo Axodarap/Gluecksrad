@@ -84,7 +84,7 @@
     height: 70px;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
     padding: 0 20px;
     background-color: #282F3D;
     z-index: 1000;
@@ -92,6 +92,16 @@
 
 .close-add-item-button{
     background-color: #CF6679;
+    color: black;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.clear-button{
+    background-color: #B9BABC;
     color: black;
     border: none;
     padding: 10px 25px;
@@ -161,7 +171,6 @@
     bottom: 0;
     left: 0;
     width: 100%;
-
     background-color: #B9BABC;
     padding: 20px;
     display: flex;
