@@ -120,23 +120,25 @@ function addItem(item){
  */
 function removeItem(item) {
    
- // Remove *one* item from the array (so items stays in sync)
+  // Remove from the JS array
   const index = items.indexOf(item);
   if (index !== -1) {
-    items.splice(index, 1);
+      items.splice(index, 1);
   }
 
-  // Remove ALL matching DOM elements with that text
+  // Find the DOM element based on its text content
   const itemList = document.getElementById("itemList");
-  const itemElements = Array.from(itemList.querySelectorAll(".item"))
-    .filter(el => el.querySelector(".item-text")?.textContent === item);
+  const itemElement = Array.from(itemList.querySelectorAll(".item"))
+    .find(el => el.querySelector(".item-text")?.textContent === item);
 
-  itemElements.forEach(el => {
-    el.classList.add("removing");
+  console.log("itemElement:", itemElement.lenth);
+
+  if (itemElement) {
+    itemElement.classList.add("removing");
     setTimeout(() => {
-      el.remove();
+      itemElement.remove();
     }, config.REMOVE_ITEM_DELAY);
-  });
+  } 
 }
 
 /**
@@ -162,9 +164,29 @@ function updateWheelUI(){
 /**
  * Clears all items from the list & the wheel.
  */
-function clearItems(){
-  while(items.length > 0) {
-    removeItem(items[0]);
+function clearItems() {
+  // Clear the JS array
+  items = [];
+  wheelProps.items = [];
+
+  // Remove all DOM elements with animation
+  const itemList = document.getElementById("itemList");
+  const itemElements = Array.from(itemList.querySelectorAll(".item"));
+
+  itemElements.forEach((itemElement, idx) => {
+    itemElement.classList.add("removing");
+    setTimeout(() => {
+      itemElement.remove();
+      // Optionally update the wheel UI after all are removed
+      if (idx === itemElements.length - 1) {
+        updateWheelUI();
+      }
+    }, config.REMOVE_ITEM_DELAY);
+  });
+
+  // If there are no items, update the wheel UI immediately
+  if (itemElements.length === 0) {
+    updateWheelUI();
   }
 }
 
