@@ -177,17 +177,10 @@ function clearItems() {
     itemElement.classList.add("removing");
     setTimeout(() => {
       itemElement.remove();
-      // Optionally update the wheel UI after all are removed
-      if (idx === itemElements.length - 1) {
-        updateWheelUI();
-      }
     }, config.REMOVE_ITEM_DELAY);
   });
 
-  // If there are no items, update the wheel UI immediately
-  if (itemElements.length === 0) {
-    updateWheelUI();
-  }
+  document.getElementById("addItemInput").focus();
 }
 
 /* ------------------------ addItems stuff ------------------------ */
