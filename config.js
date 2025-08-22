@@ -24,7 +24,7 @@ export const WHEEL_PROPS = {
   rotationResistance: -100,
   rotationSpeedMax: 1000,
   isInteractive: false,
-  lineWidth: 0,
+  lineWidth: 1,
   borderWidth: 0,
   overlayImage: IMAGES[0],
 };

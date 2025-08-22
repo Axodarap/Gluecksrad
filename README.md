@@ -3,7 +3,7 @@ using: https://github.com/CrazyTim/spin-wheel
 
 # TODO
 
-- [ ] fix item list generation, want to just mirror content of itrems[], makes clearing easier
+- [ ] lock everything while spinning
 
 - [ ] second screen slide in
 - [ ] understand removeItem() - how removal is linked to each list entry

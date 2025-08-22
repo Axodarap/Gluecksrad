@@ -9,6 +9,7 @@ let items = [];
 let wheelProps = config.WHEEL_PROPS;
 let activeScreen = "mainScreen";
 
+let isSpinning = false;
 let currentWinner = null;
 
 const wheelContainer = document.getElementById("wheelContainer");
@@ -54,6 +55,10 @@ document.getElementById("addItemInput").addEventListener("keydown", (event) => {
  * Picks a random item from the wheel.
  */
 function pickItem(){
+  if(isSpinning) return;
+
+  isSpinning = true;
+
   const winningIndex = Math.floor(Math.random() * items.length);
   const duration = config.SPIN_DURATION;
   wheel.spinToItem(winningIndex, duration, true, 4, 1, config.EASING_FUNCTION);
@@ -63,6 +68,7 @@ function pickItem(){
   currentWinner = selItem;
   setTimeout(() => {
     openWinnerModal(selItem);
+    isSpinning = false;
   }, config.SPIN_DURATION + config.WINNER_REVEAL_DELAY);
 }
 
@@ -164,6 +170,8 @@ function clearItems(){
 
 /* ------------------------ addItems stuff ------------------------ */
 function toggleScreens(){
+  if(isSpinning) return;
+
   let mainScreen = document.getElementById("mainScreen");
   let secondaryScreen = document.getElementById("secondaryScreen");
 
