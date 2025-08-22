@@ -153,9 +153,13 @@ function updateWheelUI(){
   wheel.init(wheelProps);
 }
 
+/**
+ * Clears all items from the list & the wheel.
+ */
 function clearItems(){
-  items.length = 0;
-  console.log("Cleared all items from the wheel.");
+  while(items.length > 0) {
+    removeItem(items[0]);
+  }
 }
 
 /* ------------------------ addItems stuff ------------------------ */
