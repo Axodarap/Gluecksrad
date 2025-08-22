@@ -3,17 +3,16 @@ using: https://github.com/CrazyTim/spin-wheel
 
 # TODO
 
-- [ ] lock everything while spinning
+- [ ] implement login feature
 
 - [ ] second screen slide in
 - [ ] understand removeItem() - how removal is linked to each list entry
-
-- [ ] refactor the whole item managment, not very intuitive
 
 - [ ] button hovering
 - [ ] remove black background from pointer
 - [ ] prevent two items with same color being next to each other
 
+- [x] lock everything while spinning
 - [x] result modal
 - [x] fix image loading issue
 - [x] handle key press
