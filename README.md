@@ -3,6 +3,10 @@ using: https://github.com/CrazyTim/spin-wheel
 
 # TODO
 
+- [ ] fix bug: clear all, multipole items with same label do not all get deleted from list
+
+
+
 - [ ] implement login feature
 
 - [ ] second screen slide in
