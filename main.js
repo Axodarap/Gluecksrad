@@ -120,23 +120,23 @@ function addItem(item){
  */
 function removeItem(item) {
    
-  // Remove from the JS array
+ // Remove *one* item from the array (so items stays in sync)
   const index = items.indexOf(item);
   if (index !== -1) {
-      items.splice(index, 1);
+    items.splice(index, 1);
   }
 
-  // Find the DOM element based on its text content
+  // Remove ALL matching DOM elements with that text
   const itemList = document.getElementById("itemList");
-  const itemElement = Array.from(itemList.querySelectorAll(".item"))
-    .find(el => el.querySelector(".item-text")?.textContent === item);
+  const itemElements = Array.from(itemList.querySelectorAll(".item"))
+    .filter(el => el.querySelector(".item-text")?.textContent === item);
 
-  if (itemElement) {
-    itemElement.classList.add("removing");
+  itemElements.forEach(el => {
+    el.classList.add("removing");
     setTimeout(() => {
-      itemElement.remove();
+      el.remove();
     }, config.REMOVE_ITEM_DELAY);
-  } 
+  });
 }
 
 /**
